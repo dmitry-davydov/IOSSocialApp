@@ -1,13 +1,13 @@
 //
-//  LoginViewController.swift
+//  TabViewController.swift
 //  SocialApp
 //
-//  Created by Дима Давыдов on 30.09.2020.
+//  Created by Дима Давыдов on 02.10.2020.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class TabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
