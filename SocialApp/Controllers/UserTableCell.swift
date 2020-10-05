@@ -1,5 +1,5 @@
 //
-//  GlobalGroupsTableViewCell.swift
+//  PersonalGroupsTableViewCell.swift
 //  SocialApp
 //
 //  Created by Дима Давыдов on 02.10.2020.
@@ -7,9 +7,13 @@
 
 import UIKit
 
-class GlobalGroupsTableViewCell: UITableViewCell {
+class UserTableCell: UITableViewCell {
+
+    var user: User?
     
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var avatar: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
