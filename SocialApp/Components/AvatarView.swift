@@ -36,7 +36,6 @@ import UIKit
         layer.shadowRadius = CGFloat(self.shadowRadius)
         layer.shadowOffset = .zero
         layer.masksToBounds = false
-        layer.backgroundColor = UIColor.clear.cgColor
         imageSuperView.layer.addSublayer(layer)
         
         
@@ -45,10 +44,20 @@ import UIKit
         iView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         iView.layer.masksToBounds = true
         iView.layer.cornerRadius = CGFloat(self.frame.width) / 2
-        iView.layer.backgroundColor = UIColor.clear.cgColor
+        
+        
         imageSuperView.addSubview(iView)
         
         self.addSubview(imageSuperView)
+    }
+    
+    func clearSubviews() {
+        subviews.forEach({v in
+            v.removeFromSuperview()
+        })
+        _image = nil
+        
+        print("removed")
     }
     
     func loadFrom(url: URL) {

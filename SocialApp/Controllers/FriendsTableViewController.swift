@@ -56,7 +56,6 @@ class FriendsTableViewController: UITableViewController {
         cell.user = user
         cell.name.text = user.name
         cell.avatarView.loadFrom(url: user.getImageURL())
-//        cell.avatar.loadFrom(url: user.getImageURL())
     
         return cell
     }
@@ -69,5 +68,17 @@ class FriendsTableViewController: UITableViewController {
         let destintaion = segue.destination as! UserCollectionViewController
         destintaion.userImage = cell.avatarView.image
         destintaion.title = cell.user!.name
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("end display row: \(indexPath.row)")
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserTableCell else {
+            fatalError("The dequeued cell is not an instance of UserTableCell.")
+        }
+        
+        cell.avatarView.clearSubviews()
+        cell.avatarView = nil
+        print("got cell")
     }
 }
