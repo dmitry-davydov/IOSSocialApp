@@ -25,6 +25,7 @@
 		0AD97CBB252BADB30080779C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBA252BADB30080779C /* Extensions.swift */; };
 		0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */; };
 		0AD97CC3252BC30B0080779C /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CC2252BC30B0080779C /* UserCollectionViewController.swift */; };
+		0AF9E29E252E6151001C56FB /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF9E29D252E6151001C56FB /* AvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		0AD97CBA252BADB30080779C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AD97CC2252BC30B0080779C /* UserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
+		0AF9E29D252E6151001C56FB /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		0A2EE15C251FAF35009AECA1 /* SocialApp */ = {
 			isa = PBXGroup;
 			children = (
+				0AF9E29C252E610D001C56FB /* Components */,
 				0A0193D5252A207C006977E3 /* DataProviders */,
 				0A0193D4252A1E61006977E3 /* Protocols */,
 				0A0193CC252A0933006977E3 /* Models */,
@@ -149,6 +152,14 @@
 				0AD97CC2252BC30B0080779C /* UserCollectionViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0AF9E29C252E610D001C56FB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0AF9E29D252E6151001C56FB /* AvatarView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +237,7 @@
 				0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */,
 				0A1A3F1A2527A75000235937 /* UserTableCell.swift in Sources */,
 				0A1A3F172527A35C00235937 /* GroupsTableViewController.swift in Sources */,
+				0AF9E29E252E6151001C56FB /* AvatarView.swift in Sources */,
 				0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */,
 				0A0193DD252A237B006977E3 /* MemoryDataProvider.swift in Sources */,
 				0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */,

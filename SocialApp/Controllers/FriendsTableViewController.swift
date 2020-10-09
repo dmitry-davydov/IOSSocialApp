@@ -55,7 +55,8 @@ class FriendsTableViewController: UITableViewController {
         let user = dataProvider[indexPath.row]!
         cell.user = user
         cell.name.text = user.name
-        cell.avatar.loadFrom(url: user.getImageURL())
+        cell.avatarView.loadFrom(url: user.getImageURL())
+//        cell.avatar.loadFrom(url: user.getImageURL())
     
         return cell
     }
@@ -66,7 +67,7 @@ class FriendsTableViewController: UITableViewController {
         let cell = sender as! UserTableCell
 
         let destintaion = segue.destination as! UserCollectionViewController
-        destintaion.userImage = cell.avatar.image
+        destintaion.userImage = cell.avatarView.image
         destintaion.title = cell.user!.name
     }
 }

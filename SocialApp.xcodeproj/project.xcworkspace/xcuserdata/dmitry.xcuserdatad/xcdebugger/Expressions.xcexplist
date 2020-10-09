@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "AvatarView.draw(_:):AvatarView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.prepareImage():AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "iView.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.setImage(_:):AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "superview!.bounds">
+            </PersistentString>
+            <PersistentString
+               value = "self.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
