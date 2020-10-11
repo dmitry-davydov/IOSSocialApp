@@ -9,16 +9,23 @@ import Foundation
 
 class LoginService {
     private var user: Bool = false
+    private var attempts: Int = 0
     
     func isLoggedIn() -> Bool {
         return user
     }
     
-    func performLogin(user: String, password: String) ->Bool {
-        print("Perform Login - username: \(user):\(password)")
-        sleep(1)
-        self.user = true
+    func performLogin(username: String, password: String) ->Bool {
+        self.user = false
         
-        return true
+        self.attempts += 1
+        
+        if attempts % 2 == 0 {
+            self.user = true
+        }
+        
+        sleep(1)
+        
+        return user
     }
 }

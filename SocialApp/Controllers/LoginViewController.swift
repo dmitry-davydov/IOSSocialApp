@@ -51,7 +51,6 @@ class LoginViewController: UIViewController {
 
         guard let sv = self.scrollView else {return}
         
-        // clean code :)
         // ревью такое проходит?
         // выделил память только 1 раз?
         let keyboardHeight = ((notification.userInfo! as NSDictionary).value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size.height
@@ -76,7 +75,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func onSubmitTouchUpInside(_ sender: UIButton) {
         
-        self.timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.login), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(self.login), userInfo: nil, repeats: false)
         DispatchQueue.main.async {
             sender.isEnabled = false
             sender.setTitle("Loading", for: .normal)
@@ -90,6 +89,25 @@ class LoginViewController: UIViewController {
             self.loginButtonOutlet.isEnabled = true
             self.loginButtonOutlet.setTitle(self.originalButtonText, for: .normal)
         }
+        
+        if loginService!.performLogin(username: "test", password: "test") {
+            navigateToEntryPoint()
+            return
+        }
+        
+        alertWrongLoginOrPassword()
+    }
+    
+    private func alertWrongLoginOrPassword() {
+        let alert = UIAlertController(title: "Error", message: "Login or Password invalid", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func navigateToEntryPoint() {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabViewController") as! TabViewController
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

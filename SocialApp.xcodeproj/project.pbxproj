@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1A3F142527A33300235937 /* PersonalGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F132527A33300235937 /* PersonalGroupsTableViewController.swift */; };
+		0A1A3F172527A35C00235937 /* GlobalGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F162527A35C00235937 /* GlobalGroupsTableViewController.swift */; };
+		0A1A3F1A2527A75000235937 /* PersonalGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F192527A75000235937 /* PersonalGroupsTableViewCell.swift */; };
+		0A1A3F1D2527B00B00235937 /* GlobalGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F1C2527B00B00235937 /* GlobalGroupsTableViewCell.swift */; };
+		0A1A3F202527B26F00235937 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F1F2527B26F00235937 /* TabViewController.swift */; };
 		0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EE15D251FAF35009AECA1 /* AppDelegate.swift */; };
 		0A2EE160251FAF35009AECA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2EE15F251FAF35009AECA1 /* SceneDelegate.swift */; };
 		0A2EE165251FAF35009AECA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A2EE163251FAF35009AECA1 /* Main.storyboard */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A1A3F132527A33300235937 /* PersonalGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalGroupsTableViewController.swift; sourceTree = "<group>"; };
+		0A1A3F162527A35C00235937 /* GlobalGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupsTableViewController.swift; sourceTree = "<group>"; };
+		0A1A3F192527A75000235937 /* PersonalGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalGroupsTableViewCell.swift; sourceTree = "<group>"; };
+		0A1A3F1C2527B00B00235937 /* GlobalGroupsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupsTableViewCell.swift; sourceTree = "<group>"; };
+		0A1A3F1F2527B26F00235937 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		0A2EE15A251FAF35009AECA1 /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2EE15D251FAF35009AECA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A2EE15F251FAF35009AECA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +100,11 @@
 			isa = PBXGroup;
 			children = (
 				0A99F40E2524FB4A00221793 /* LoginViewController.swift */,
+				0A1A3F132527A33300235937 /* PersonalGroupsTableViewController.swift */,
+				0A1A3F162527A35C00235937 /* GlobalGroupsTableViewController.swift */,
+				0A1A3F192527A75000235937 /* PersonalGroupsTableViewCell.swift */,
+				0A1A3F1C2527B00B00235937 /* GlobalGroupsTableViewCell.swift */,
+				0A1A3F1F2527B26F00235937 /* TabViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -164,9 +179,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1A3F142527A33300235937 /* PersonalGroupsTableViewController.swift in Sources */,
 				0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */,
+				0A1A3F1A2527A75000235937 /* PersonalGroupsTableViewCell.swift in Sources */,
+				0A1A3F172527A35C00235937 /* GlobalGroupsTableViewController.swift in Sources */,
 				0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */,
 				0A3B8FE82524FF2C003D4939 /* LoginService.swift in Sources */,
+				0A1A3F202527B26F00235937 /* TabViewController.swift in Sources */,
+				0A1A3F1D2527B00B00235937 /* GlobalGroupsTableViewCell.swift in Sources */,
 				0A2EE160251FAF35009AECA1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
