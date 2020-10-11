@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kch-ac-OzS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PG9-b4-jY3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -195,15 +194,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="top" id="zaP-v9-hDZ">
-                                            <rect key="frame" x="87" y="39" width="240" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4xG-GU-W5f">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="108"/>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pT8-Gg-iYt" customClass="LikeUIButton" customModule="SocialApp" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="113" width="128" height="15"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="img" value="hea"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="defaultImg" value="suit.heart" catalog="system"/>
+                                                <userDefinedRuntimeAttribute type="image" keyPath="selectedImg" value="suit.heart.fill" catalog="system"/>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                 </view>
                                 <viewLayoutGuide key="safeArea" id="oc7-ik-A1T"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4xG-GU-W5f" secondAttribute="bottom" constant="20" id="5Fb-7C-qXZ"/>
+                                    <constraint firstItem="4xG-GU-W5f" firstAttribute="top" secondItem="Ulz-iK-XR7" secondAttribute="top" id="C4Z-Wb-l8X"/>
+                                    <constraint firstItem="pT8-Gg-iYt" firstAttribute="leading" secondItem="Ulz-iK-XR7" secondAttribute="leading" id="JIY-b5-VP3"/>
+                                    <constraint firstItem="4xG-GU-W5f" firstAttribute="leading" secondItem="Ulz-iK-XR7" secondAttribute="leading" id="KBr-r6-0gn"/>
+                                    <constraint firstAttribute="trailing" secondItem="pT8-Gg-iYt" secondAttribute="trailing" id="VMR-tC-KqP"/>
+                                    <constraint firstItem="pT8-Gg-iYt" firstAttribute="top" secondItem="4xG-GU-W5f" secondAttribute="bottom" constant="5" id="XZi-QN-lbE"/>
+                                    <constraint firstAttribute="bottom" secondItem="pT8-Gg-iYt" secondAttribute="bottom" id="qPM-AV-5fu"/>
+                                    <constraint firstAttribute="trailing" secondItem="4xG-GU-W5f" secondAttribute="trailing" id="xHw-id-B4O"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="avatarView" destination="4xG-GU-W5f" id="36H-iy-gO9"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -370,12 +388,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="hea" width="128" height="128"/>
         <image name="loading_image" width="387" height="387"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="suit.heart" catalog="system" width="128" height="109"/>
+        <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

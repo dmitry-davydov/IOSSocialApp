@@ -24,7 +24,7 @@ class UserCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userImageCell", for: indexPath) as! UserCollectionViewCell
         
-//        cell.avatar.setImage(userImage!)
+        cell.avatarView.image = userImage!
         
         return cell
     }
