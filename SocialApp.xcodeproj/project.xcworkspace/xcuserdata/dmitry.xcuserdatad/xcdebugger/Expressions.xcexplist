@@ -3,7 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "AvatarView.draw(_:):AvatarView.swift">
+         contextName = "AvatarView.setImage(_:):AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "superview!.bounds">
+            </PersistentString>
+            <PersistentString
+               value = "self.bounds">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "AvatarView.prepareImage():AvatarView.swift">
@@ -14,13 +22,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "AvatarView.setImage(_:):AvatarView.swift">
+         contextName = "AvatarView.draw(_:):AvatarView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "GroupsViewController.tableView(_:didSelectRowAt:):GroupsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "superview!.bounds">
+               value = "GroupsDataProvider.instance">
             </PersistentString>
             <PersistentString
-               value = "self.bounds">
+               value = "UserGroupsDataProvider.instance">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

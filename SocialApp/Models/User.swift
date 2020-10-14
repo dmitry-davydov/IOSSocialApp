@@ -7,12 +7,16 @@
 
 import Foundation
 
-struct User {
+struct User: IDProtocol {
     var uid: String
     var name: String
     var image: String
     
     func getImageURL() -> URL {
         return URL.init(string: self.image)!
+    }
+    
+    func getID() -> String {
+        return uid
     }
 }

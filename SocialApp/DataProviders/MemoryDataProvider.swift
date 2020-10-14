@@ -7,7 +7,12 @@
 
 import Foundation
 
-class MemoryDataProvider<T> {
+protocol IDProtocol {
+    func getID() -> String
+}
+
+class MemoryDataProvider<T:IDProtocol> {
+ 
     private var data: [T] = []
     
     var count: Int {
@@ -27,4 +32,25 @@ class MemoryDataProvider<T> {
     subscript(index: Int) -> T? {
         return data[index]
     }
+    
+    func getByID(id: String) -> Optional<T> {
+        for item in data {
+            if item.getID() != id { continue }
+            
+            return item
+        }
+        
+        return nil
+    }
+    
+    func hasItem(id: String) -> Bool {
+        for item in data {
+            if item.getID() != id { continue }
+            
+            return true
+        }
+        
+        return false
+    }
 }
+

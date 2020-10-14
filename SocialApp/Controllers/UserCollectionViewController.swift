@@ -28,5 +28,4 @@ class UserCollectionViewController: UICollectionViewController {
         
         return cell
     }
-
 }
