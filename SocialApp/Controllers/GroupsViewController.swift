@@ -17,9 +17,9 @@ class GroupsViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GroupsDataProvider.instance.count
+        return GroupsDataProvider.instance.getDataCount()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,7 +47,7 @@ class GroupsViewController: UITableViewController {
             fatalError("Can not find group with \(cell.gid ?? "unknown") gid")
         }
             
-        _ = UserGroupsDataProvider.instance.addDataItem(item: group)
+        GroupsDataProvider.instance.addUserGroup(group)
         
         
         self.performSegue(withIdentifier: "AddGroupSegue", sender: nil)

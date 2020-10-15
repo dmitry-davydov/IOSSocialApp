@@ -7,6 +7,6 @@
 
 import Foundation
 
-class UserGroupsDataProvider: MemoryDataProvider<Group> {
-    static let instance = UserGroupsDataProvider()
+class UserGroupsStorage: MemoryDataProvider<Group> {
+    static let instance = UserGroupsStorage()
 }

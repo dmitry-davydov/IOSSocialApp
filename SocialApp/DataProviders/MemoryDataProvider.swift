@@ -52,5 +52,9 @@ class MemoryDataProvider<T:IDProtocol> {
         
         return false
     }
+    
+    func removeItem(id: String) {
+        self.data = self.data.filter({$0.getID() != id})
+    }
 }
 

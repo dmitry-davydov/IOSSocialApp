@@ -7,17 +7,56 @@
 
 import Foundation
 
-class GroupsDataProvider: MemoryDataProvider<Group> {
+
+class GroupsDataProvider {
+    let userGroups = UserGroupsStorage.instance
+    private let groups = GroupsStorage.instance
+    
     static let instance = GroupsDataProvider()
+
+    private var groupsCache: [Group] = []
     
-    override init() {
-        super.init()
-        self.loadFakeData()
+    init() {
+        self.filterGlobalCache()
     }
     
-    private func loadFakeData() {
-        for i in 0...100 {
-            _ = self.addDataItem(item: Group(gid: UUID.init().uuidString, name: "Group \(i)", image: "https://picsum.photos/200"))
-        }
+    private func filterGlobalCache() {
+        let userData = userGroups.getData()
+        var gr = groups.getData()
+        
+        gr.removeAll(where: { (g: Group) in
+            userData.contains(where: {(ug: Group) in
+                return g.getID() == ug.getID()
+            })})
+        
+        groupsCache = gr
     }
+    
+    func addUserGroup(_ group: Group) {
+        _ = userGroups.addDataItem(item: group)
+        self.filterGlobalCache()
+    }
+    
+    func deleteUserGroup(_ group: Group) {
+        userGroups.removeItem(id: group.getID())
+        self.filterGlobalCache()
+    }
+
+    
+    func getData() -> [Group] {
+        return groupsCache
+    }
+    
+    subscript(groupIndex: Int) -> Group? {
+        return groupsCache[groupIndex]
+    }
+    
+//    subscript(userGroupIndex: Int) -> Group {
+//        return userGroups[userGroupIndex]
+//    }
+    
+    func getDataCount() -> Int {
+        return groupsCache.count
+    }
+    
 }
