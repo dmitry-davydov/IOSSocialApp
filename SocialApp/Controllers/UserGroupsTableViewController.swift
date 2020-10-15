@@ -9,9 +9,12 @@ import UIKit
 
 class UserGroupsTableViewController: UITableViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
+
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

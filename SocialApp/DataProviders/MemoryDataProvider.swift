@@ -56,5 +56,9 @@ class MemoryDataProvider<T:IDProtocol> {
     func removeItem(id: String) {
         self.data = self.data.filter({$0.getID() != id})
     }
+    
+    func sort(by: (T, T) -> Bool) {
+        self.data = self.data.sorted(by: by)
+    }
 }
 
