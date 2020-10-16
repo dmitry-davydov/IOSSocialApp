@@ -33,8 +33,13 @@ class GroupsViewController: UITableViewController {
         }
         
         cell.label.text = item.name
-        cell.avatar.loadFrom(url: item.getImageURL())
-
+        
+        if let imgInstance = item.imageInstance {
+            cell.avatar.image = imgInstance
+        } else {
+            cell.avatar.loadFrom(url: item.getImageURL())
+        }
+        
         return cell
     }
     

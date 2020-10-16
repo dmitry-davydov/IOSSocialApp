@@ -86,10 +86,15 @@ class FriendsTableViewController: UITableViewController {
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let cell = sender as! UserTableCell
-
         let destintaion = segue.destination as! UserCollectionViewController
-        destintaion.userImage = cell.avatarView.image
+        
+        let selectedIndexPath = self.tableView.indexPathForSelectedRow!
+        
+        let selectedUser = indexedUsers[selectedIndexPath.section][selectedIndexPath.row]
+        
+        destintaion.userImage = selectedUser.imageInstance
         destintaion.title = cell.user!.name
     }
 

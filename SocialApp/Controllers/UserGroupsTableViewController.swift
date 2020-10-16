@@ -33,10 +33,17 @@ class UserGroupsTableViewController: UITableViewController {
         
         var cell: UserGroupCell
         
-        cell = (tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as? UserGroupCell)!
+        cell = (tableView.dequeueReusableCell(withIdentifier: "UserGroupCell", for: indexPath) as? UserGroupCell)!
         
         cell.name.text = item.name
-        cell.avatar.loadFrom(url: item.getImageURL())
+        
+        if let imgInstance = item.imageInstance {
+            cell.avatar.image = imgInstance
+        } else {
+            cell.avatar.loadFrom(url: item.getImageURL())
+        }
+        
+        
 
         return cell
     }
@@ -55,6 +62,19 @@ class UserGroupsTableViewController: UITableViewController {
     @IBAction func addGroup(segue: UIStoryboardSegue) {
         if segue.identifier == "AddGroupSegue" {
             self.tableView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GroupSegue" {
+            guard let vc = segue.destination as? NewsItemTableViewController else { return }
+            
+            guard let userGroup = GroupsDataProvider.instance.userGroups[self.tableView.indexPathForSelectedRow!.row] else {
+                fatalError("Could not find user group")
+            }
+            
+            vc.title = userGroup.name
+            
         }
     }
 }

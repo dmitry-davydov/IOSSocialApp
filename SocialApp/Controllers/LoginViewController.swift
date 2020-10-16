@@ -30,6 +30,9 @@ class LoginViewController: UIViewController {
         
         username.text = "1"
         password.text = "1"
+        
+        scrollView?.contentInset = UIEdgeInsets.zero
+        scrollView?.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     private func prepareUI() {

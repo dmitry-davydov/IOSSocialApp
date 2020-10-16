@@ -8,15 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ImageUrlLoadble {
-    func imageLoaded()
-}
-
-extension ImageUrlLoadble {
-    func imageLoaded() {}
-}
-
-extension UIImageView: ImageUrlLoadble {
+extension UIImageView {
     
     
     func loadFrom(url: URL) {
@@ -26,7 +18,7 @@ extension UIImageView: ImageUrlLoadble {
             
             DispatchQueue.main.async {
                 self.image = UIImage(data: imageData!)
-                self.imageLoaded()
+                self.clipsToBounds = true
             }
         }
     }

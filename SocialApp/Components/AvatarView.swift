@@ -13,6 +13,7 @@ import UIKit
     
     @IBInspectable weak var image: UIImage? {
         set {
+            _image = image
             setImage(newValue!)
         }
         get {
