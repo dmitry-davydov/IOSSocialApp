@@ -14,6 +14,8 @@ class LoginViewController: UIViewController {
     var timer: Timer?
     var originalButtonText: String?
     
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var password: UITextField!
     @IBOutlet weak var loginButtonOutlet: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -25,6 +27,9 @@ class LoginViewController: UIViewController {
         }
         
         self.prepareUI()
+        
+        username.text = "1"
+        password.text = "1"
     }
     
     private func prepareUI() {
@@ -90,12 +95,15 @@ class LoginViewController: UIViewController {
             self.loginButtonOutlet.setTitle(self.originalButtonText, for: .normal)
         }
         
-        if loginService!.performLogin(username: "test", password: "test") {
+        guard let usernameText = username.text else { alertWrongLoginOrPassword(); return ;}
+        guard let passwordText = password.text else { alertWrongLoginOrPassword(); return ;}
+        
+        if loginService!.performLogin(username: usernameText, password: passwordText) {
             navigateToEntryPoint()
             return
         }
         
-        alertWrongLoginOrPassword()
+        
     }
     
     private func alertWrongLoginOrPassword() {

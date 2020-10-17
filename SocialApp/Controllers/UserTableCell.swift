@@ -7,9 +7,12 @@
 
 import UIKit
 
-class PersonalGroupsTableViewCell: UITableViewCell {
+class UserTableCell: UITableViewCell {
 
+    var user: User?
+    
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var avatarView: AvatarView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

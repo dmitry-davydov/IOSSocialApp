@@ -1,15 +1,20 @@
 //
-//  GlobalGroupsTableViewCell.swift
+//  GroupCell.swift
 //  SocialApp
 //
-//  Created by Дима Давыдов on 02.10.2020.
+//  Created by Дима Давыдов on 15.10.2020.
 //
 
+import Foundation
 import UIKit
 
-class GlobalGroupsTableViewCell: UITableViewCell {
+class GroupCell: UITableViewCell {
     
-    @IBOutlet weak var name: UILabel!
+    var gid: String!
+    
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var avatar: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +25,4 @@ class GlobalGroupsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
