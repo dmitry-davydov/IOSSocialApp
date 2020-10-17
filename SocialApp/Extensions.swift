@@ -8,7 +8,17 @@
 import Foundation
 import UIKit
 
-extension UIImageView {
+protocol ImageUrlLoadble {
+    func imageLoaded()
+}
+
+extension ImageUrlLoadble {
+    func imageLoaded() {}
+}
+
+extension UIImageView: ImageUrlLoadble {
+    
+    
     func loadFrom(url: URL) {
         DispatchQueue.global(qos: .userInteractive).async {
             
@@ -16,7 +26,9 @@ extension UIImageView {
             
             DispatchQueue.main.async {
                 self.image = UIImage(data: imageData!)
+                self.imageLoaded()
             }
         }
     }
 }
+

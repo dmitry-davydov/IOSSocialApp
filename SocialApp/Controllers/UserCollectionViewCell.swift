@@ -8,6 +8,6 @@
 import UIKit
 
 class UserCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var avatarView: UIImageView!
+    @IBOutlet weak var likeButton: LikeUIButton!
 }
