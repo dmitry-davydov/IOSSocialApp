@@ -17,7 +17,7 @@ class LoginService {
     
     func performLogin(username: String, password: String) -> Bool {
         self.user = username == "1" && password == "1"
-        
+        sleep(1)
         return user
     }
 }
