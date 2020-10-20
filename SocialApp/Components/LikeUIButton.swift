@@ -27,13 +27,15 @@ class LikeUIButton: UIControl {
     
     weak var delegate: LikeUIButtonDelegate?
     
+    var defaultImg = UIImage.init(systemName: "suit.heart")
+    var selectedImg = UIImage.init(systemName: "suit.heart.fill")
+    
     var isLiked: Bool = false {
         
         didSet {
             
             if let delegate = delegate {
                 counterValue = delegate.willUpdateLikeCounter(isLiked: isLiked, currentCounterValue: counterValue)
-                print(counterValue)
                 updateUI()
                 return
             }
@@ -66,10 +68,7 @@ class LikeUIButton: UIControl {
         button.frame = self.frame
         button.setTitleColor(UIColor.black, for: .normal)
         button.contentHorizontalAlignment = .left
-        let defaultImg = UIImage.init(systemName: "suit.heart")
-        let selectedImg = UIImage.init(systemName: "suit.heart.fill")
         button.setImage(defaultImg, for: .normal)
-        button.setImage(selectedImg, for: .selected)
         
         button.addTarget(self, action: #selector(toggleLike), for: .touchUpInside)
         
@@ -80,13 +79,24 @@ class LikeUIButton: UIControl {
     }
     
     private func updateUI() {
-        button.isSelected = isLiked
-        button.setTitle("\(counterValue)", for: .selected)
+//        button.isSelected = isLiked
+        
+//        button.setTitle("\(counterValue)", for: .selected)
         button.setTitle("\(counterValue)", for: .normal)
     }
     
     @objc private func toggleLike() {
-        self.isLiked.toggle()
+        UIView.animate(withDuration: 0.1, delay: 0, options: [.curveLinear], animations: {
+            self.button.alpha = 0
+            self.button.imageView?.transform = CGAffineTransform.init(rotationAngle: 180)
+        }, completion: {(_) in
+            self.isLiked.toggle()
+            self.button.imageView?.transform = .identity
+            self.button.setImage(self.isLiked ? self.selectedImg : self.defaultImg, for: .normal)
+            self.button.alpha = 1
+            self.button.setTitle("\(self.counterValue)", for: .normal)
+        })
+        
         self.delegate?.didLikeStateChanged(isLiked: self.isLiked)
     }
     

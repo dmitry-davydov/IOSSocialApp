@@ -8,11 +8,10 @@
 import UIKit
 
 class UserGroupsTableViewController: UITableViewController {
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.delaysContentTouches = false
     }
 
 
@@ -42,8 +41,7 @@ class UserGroupsTableViewController: UITableViewController {
         } else {
             cell.avatar.loadFrom(url: item.getImageURL())
         }
-        
-        
+
 
         return cell
     }

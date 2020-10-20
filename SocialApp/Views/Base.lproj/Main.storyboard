@@ -129,29 +129,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserGroupCell" textLabel="E19-zc-PdF" imageView="PdW-nm-1dX" style="IBUITableViewCellStyleDefault" id="q1h-iv-MfL" customClass="UserGroupCell" customModule="SocialApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserGroupCell" id="q1h-iv-MfL" customClass="UserGroupCell" customModule="SocialApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="70.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q1h-iv-MfL" id="iek-iY-LcA" customClass="UserGroupCell" customModule="SocialApp" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q1h-iv-MfL" id="iek-iY-LcA">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E19-zc-PdF">
-                                            <rect key="frame" x="79" y="0.0" width="315" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9VH-Bm-bEl">
+                                            <rect key="frame" x="20" y="5" width="60" height="60.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="4Ve-L8-2GX"/>
+                                                <constraint firstAttribute="width" constant="60" id="6Ys-At-Pd6"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPe-Su-LUo">
+                                            <rect key="frame" x="100" y="25" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="loading_image" id="PdW-nm-1dX">
-                                            <rect key="frame" x="20" y="0.0" width="44" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="jPe-Su-LUo" firstAttribute="leading" secondItem="9VH-Bm-bEl" secondAttribute="trailing" constant="20" id="CMX-AJ-enD"/>
+                                        <constraint firstItem="9VH-Bm-bEl" firstAttribute="leading" secondItem="iek-iY-LcA" secondAttribute="leading" constant="20" id="FDZ-N0-Q1m"/>
+                                        <constraint firstItem="jPe-Su-LUo" firstAttribute="centerY" secondItem="iek-iY-LcA" secondAttribute="centerY" id="WqX-AS-U0E"/>
+                                        <constraint firstItem="9VH-Bm-bEl" firstAttribute="top" secondItem="iek-iY-LcA" secondAttribute="top" constant="5" id="Z2z-fD-xgE"/>
+                                        <constraint firstAttribute="bottom" secondItem="9VH-Bm-bEl" secondAttribute="bottom" constant="5" id="s7W-Xs-Wu3"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="avatar" destination="PdW-nm-1dX" id="3vG-2c-pfo"/>
-                                    <outlet property="name" destination="E19-zc-PdF" id="u1F-Tn-Ot2"/>
+                                    <outlet property="avatar" destination="9VH-Bm-bEl" id="aRU-53-B1M"/>
+                                    <outlet property="name" destination="jPe-Su-LUo" id="scA-SU-qAU"/>
                                     <segue destination="abt-CN-kd3" kind="show" identifier="GroupSegue" id="gN0-nM-jsU"/>
                                 </connections>
                             </tableViewCell>
@@ -171,7 +180,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ft-WG-s1Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3643" y="751"/>
+            <point key="canvasLocation" x="3642.0289855072465" y="750.66964285714278"/>
         </scene>
         <!--News Item Table View Controller-->
         <scene sceneID="4Yx-b6-Jfu">
@@ -518,12 +527,12 @@
     <resources>
         <image name="hea" width="128" height="128"/>
         <image name="loading_image" width="387" height="387"/>
-        <image name="message" catalog="system" width="32" height="32"/>
-        <image name="person.3.fill" catalog="system" width="32" height="32"/>
-        <image name="person.fill" catalog="system" width="32" height="32"/>
-        <image name="square.and.arrow.up" catalog="system" width="32" height="32"/>
-        <image name="suit.heart" catalog="system" width="32" height="32"/>
-        <image name="suit.heart.fill" catalog="system" width="32" height="32"/>
+        <image name="message" catalog="system" width="128" height="113"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="suit.heart" catalog="system" width="128" height="109"/>
+        <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
