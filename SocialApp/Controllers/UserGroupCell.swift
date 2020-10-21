@@ -8,22 +8,23 @@
 import UIKit
 
 class UserGroupCell: UITableViewCell {
+    func animationView() -> UIView? {
+        return avatar
+    }
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     
+    var cellAnimation = ScaleViewCellAnimation()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        cellAnimation.animationView = avatar
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        
         if selected {
-            UIView.animate(withDuration: 0.1, delay: 0, options: [.beginFromCurrentState], animations: {
-                self.avatar.transform = .identity
-            }, completion: {(_) in
-                super.setSelected(selected, animated: animated)
-            })
+            cellAnimation.startOutAnimation(complete: {super.setSelected(selected, animated: animated)})
             
             return
         }
@@ -32,14 +33,8 @@ class UserGroupCell: UITableViewCell {
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        
         super.setHighlighted(highlighted, animated: animated)
-        
         if !highlighted { return }
-        UIView.animate(withDuration: 0.1, delay: 0, options: [.beginFromCurrentState], animations: {
-            self.avatar.transform = self.avatar.transform.scaledBy(x: 0.9, y: 0.9)
-        }, completion: {(_) in
-            
-        })
+        cellAnimation.startInAnimation(complete: {})
     }
 }

@@ -36,7 +36,6 @@ class LoadingUIButton: UIButton {
         
         self.setTitle("", for: .normal)
         
-        // выглядит очень костыльно
         self.subview.frame = CGRect(x: 30, y: 5, width: 50, height: self.frame.size.height)
         
         for i in 0..<3 {
@@ -49,8 +48,7 @@ class LoadingUIButton: UIButton {
             let delay = i == 0 ? 0 : TimeInterval(0.1 * Double(i))
             
             UIView.animate(withDuration: 0.4, delay: delay, options: [.autoreverse, .repeat], animations: {
-                v.frame = CGRect(x: CGFloat(3 + (8 * i)), y: v.bounds.maxY + 3.5, width: 8, height: 8)
-                v.layer.cornerRadius = 5
+                v.alpha = 0
             }, completion: nil)
             
             dots.append(v)
