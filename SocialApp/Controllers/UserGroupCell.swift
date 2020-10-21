@@ -8,9 +8,6 @@
 import UIKit
 
 class UserGroupCell: UITableViewCell {
-    func animationView() -> UIView? {
-        return avatar
-    }
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var avatar: UIImageView!
