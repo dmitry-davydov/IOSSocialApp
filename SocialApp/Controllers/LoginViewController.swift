@@ -106,8 +106,6 @@ class LoginViewController: UIViewController {
             navigateToEntryPoint()
             return
         }
-        
-        
     }
     
     private func alertWrongLoginOrPassword() {

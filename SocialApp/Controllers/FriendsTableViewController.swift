@@ -16,7 +16,7 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.delaysContentTouches = false
         searchBar.delegate = self
         
         indexUsers(nil)
@@ -82,9 +82,7 @@ class FriendsTableViewController: UITableViewController {
         
         return cell
     }
-    
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let cell = sender as! UserTableCell

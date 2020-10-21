@@ -16,7 +16,6 @@ class UserGroupsTableViewController: UITableViewController {
 
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
@@ -30,9 +29,9 @@ class UserGroupsTableViewController: UITableViewController {
             fatalError("Out of user groups")
         }
         
-        var cell: UserGroupCell
-        
-        cell = (tableView.dequeueReusableCell(withIdentifier: "UserGroupCell", for: indexPath) as? UserGroupCell)!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserGroupCell", for: indexPath) as? UserGroupCell else {
+            fatalError("Can not convert Cell to UserGroupCell")
+        }
         
         cell.name.text = item.name
         
@@ -41,7 +40,6 @@ class UserGroupsTableViewController: UITableViewController {
         } else {
             cell.avatar.loadFrom(url: item.getImageURL())
         }
-
 
         return cell
     }

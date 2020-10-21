@@ -57,7 +57,6 @@ import UIKit
     }
     
     deinit {
-        print("De-Alloc")
         imageSuperView = nil
     }
     
@@ -76,7 +75,6 @@ import UIKit
         _image = nil
         imageSuperView = nil
         imageView = nil
-        print("removed")
     }
     
     func loadFrom(url: URL) {

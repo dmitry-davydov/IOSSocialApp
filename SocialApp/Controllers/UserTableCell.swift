@@ -18,7 +18,6 @@ class UserTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         cellAnimation.animationView = avatarView
         
     }

@@ -12,28 +12,12 @@ class LoadingUIButton: UIButton {
     
     private var subview: UIView = UIView()
     private var dots: [UIView] = []
-
-    private func createLoadingView() {
-        print("create loading view")
-        
-        
-        
-    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        createLoadingView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        createLoadingView()
-    }
+    private var initialText: String?
     
     func startLoading(){
-        // создадим такую же кнопочку и поместим под основной
-        // когда выполнится функция, поменяем местами вьюшки
         
+        self.initialText = self.currentTitle
         self.setTitle("", for: .normal)
         
         self.subview.frame = CGRect(x: 30, y: 5, width: 50, height: self.frame.size.height)
@@ -66,5 +50,7 @@ class LoadingUIButton: UIButton {
             v.layer.removeAllAnimations()
             v.removeFromSuperview()
         }
+        
+        setTitle(self.initialText, for: .normal)
     }
 }

@@ -54,7 +54,6 @@ class GroupsViewController: UITableViewController {
             
         GroupsDataProvider.instance.addUserGroup(group)
         
-        
         self.performSegue(withIdentifier: "AddGroupSegue", sender: nil)
     }
     

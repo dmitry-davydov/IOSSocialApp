@@ -15,7 +15,6 @@ class NewsItemTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         
         likeUiButton.delegate = self
         

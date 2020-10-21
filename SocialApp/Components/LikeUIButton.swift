@@ -79,9 +79,6 @@ class LikeUIButton: UIControl {
     }
     
     private func updateUI() {
-//        button.isSelected = isLiked
-        
-//        button.setTitle("\(counterValue)", for: .selected)
         button.setTitle("\(counterValue)", for: .normal)
     }
     

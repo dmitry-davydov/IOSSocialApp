@@ -11,6 +11,7 @@ class NewsItemTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delaysContentTouches = false
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
