@@ -23,6 +23,7 @@
 		0A39704A2531CF7300B6082B /* LikeUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3970492531CF7300B6082B /* LikeUIButton.swift */; };
 		0A3B8FE82524FF2C003D4939 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B8FE72524FF2C003D4939 /* LoginService.swift */; };
 		0A565087253B6F6400FF7018 /* LoadingUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A565086253B6F6400FF7018 /* LoadingUIButton.swift */; };
+		0A6B29BA2542047E00415CAD /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B29B92542047E00415CAD /* ImageViewController.swift */; };
 		0A734A9E25379E200092F1CB /* FriendsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A734A9D25379E200092F1CB /* FriendsDataProvider.swift */; };
 		0A734AA125379F2C0092F1CB /* UserGroupsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A734AA025379F2C0092F1CB /* UserGroupsStorage.swift */; };
 		0A734AA42537A00E0092F1CB /* GroupsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A734AA32537A00E0092F1CB /* GroupsStorage.swift */; };
@@ -60,6 +61,7 @@
 		0A3970492531CF7300B6082B /* LikeUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUIButton.swift; sourceTree = "<group>"; };
 		0A3B8FE72524FF2C003D4939 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		0A565086253B6F6400FF7018 /* LoadingUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingUIButton.swift; sourceTree = "<group>"; };
+		0A6B29B92542047E00415CAD /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		0A734A9D25379E200092F1CB /* FriendsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDataProvider.swift; sourceTree = "<group>"; };
 		0A734AA025379F2C0092F1CB /* UserGroupsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsStorage.swift; sourceTree = "<group>"; };
 		0A734AA32537A00E0092F1CB /* GroupsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsStorage.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				0A734AAB2537AA190092F1CB /* GroupCell.swift */,
 				0A7C6552253A23080000AFF3 /* NewsItemTableViewCell.swift */,
 				0A7C655B253A2B900000AFF3 /* NewsItemTableViewController.swift */,
+				0A6B29B92542047E00415CAD /* ImageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				0AD97CBB252BADB30080779C /* Extensions.swift in Sources */,
 				0A734AA82537A1C90092F1CB /* GroupsViewController.swift in Sources */,
 				0A7C6556253A23640000AFF3 /* GroupNewsDataProvider.swift in Sources */,
+				0A6B29BA2542047E00415CAD /* ImageViewController.swift in Sources */,
 				0A734A9E25379E200092F1CB /* FriendsDataProvider.swift in Sources */,
 				0A1A3F202527B26F00235937 /* TabViewController.swift in Sources */,
 				0AD97CC3252BC30B0080779C /* UserCollectionViewController.swift in Sources */,

@@ -277,10 +277,29 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Eem-XW-H1w"/>
+                    <connections>
+                        <segue destination="Pyj-ol-3x8" kind="show" identifier="ImageSliderSegue" id="pqk-Nb-mEu"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z0W-Iz-lKB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4615.9420289855079" y="1046.6517857142858"/>
+        </scene>
+        <!--ImageViewController-->
+        <scene sceneID="bvi-UM-MBb">
+            <objects>
+                <viewController title="ImageViewController" id="Pyj-ol-3x8" customClass="ImageViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fd2-xa-w1q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="l7N-Nm-gS7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gEY-k9-UeJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NoY-eq-j7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5556" y="1061"/>
         </scene>
         <!--User Collection View Controller-->
         <scene sceneID="8j5-BR-ZbP">
