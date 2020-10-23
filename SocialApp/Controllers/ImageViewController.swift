@@ -9,10 +9,10 @@ import UIKit
 
 class ImageViewController: UIViewController {
 
-    var animation = UIViewPropertyAnimator()
+    private var animation = UIViewPropertyAnimator()
     var imageViewList: [UIImageView] = []
-    var currentImagePosition = 0
-    var initialGuesturePoint: CGPoint?
+    private var currentImagePosition = 0
+    private var initialGuesturePoint: CGPoint?
     
     enum AnimateTo {
         case left, right
@@ -167,11 +167,11 @@ class ImageViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        for v in self.view.subviews {
+        for v in imageViewList {
             v.removeFromSuperview()
         }
         self.tabBarController?.tabBar.alpha = 1
-        
+        imageViewList = []
     }
 
 }
