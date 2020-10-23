@@ -67,6 +67,11 @@ class ImageViewController: UIViewController {
         switch recognizer.state {
         case .began:
             self.initialGuesturePoint = recognizer.translation(in: self.view)
+            UIView.animate(withDuration: 0.3, animations: {
+                let currentImageView = self.imageViewList[self.currentImagePosition]
+                currentImageView.transform = currentImageView.transform.scaledBy(x: 0.8, y: 0.8)
+                currentImageView.alpha = 0.6
+            })
         case .changed:
             let currentImageView = self.imageViewList[self.currentImagePosition]
             let translation = recognizer.translation(in: self.view)
@@ -89,6 +94,8 @@ class ImageViewController: UIViewController {
             
             animation = UIViewPropertyAnimator(duration: 0.1, curve: .easeInOut, animations: {
                 let currentImageView = self.imageViewList[self.currentImagePosition]
+                currentImageView.alpha = 1
+                currentImageView.transform = .identity
                 currentImageView.frame.origin.x = 0
             })
             animation.startAnimation()
@@ -105,32 +112,30 @@ class ImageViewController: UIViewController {
         var currentViewTargetXPosition: CGFloat
         var nextView: UIImageView
         var nextImagePosition = currentImagePosition
-        
-        let xPosition = self.view.frame.width - (0.8 * self.view.frame.width)
+        var nextViewInitialXPosition: CGFloat = 0
         
         switch to {
         case .left:
             currentViewTargetXPosition = self.view.frame.size.width
+            nextViewInitialXPosition = self.view.frame.size.width * -1
             nextView = self.imageViewList[self.currentImagePosition - 1]
             nextImagePosition -= 1
         case .right:
             currentViewTargetXPosition = self.view.frame.size.width * -1
+            nextViewInitialXPosition = self.view.frame.size.width
             nextView = self.imageViewList[self.currentImagePosition + 1]
             nextImagePosition += 1
         }
         
-        nextView.transform = nextView.transform.scaledBy(x: 0.5, y: 0.5)
-        nextView.alpha = 0.3
+        nextView.transform = .identity
+        nextView.frame.origin.x = nextViewInitialXPosition
         
         UIView.animateKeyframes(withDuration: 0.7, delay: 0, options: .calculationModeLinear, animations: {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
                 currentImageView.frame.origin.x = currentViewTargetXPosition
             })
-            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.5, animations: {
-                nextView.frame.origin.x = xPosition
-            })
-            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25, animations: {
-                nextView.transform = .identity
+
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
                 nextView.frame.origin.x = 0
                 nextView.alpha = 1
             })
