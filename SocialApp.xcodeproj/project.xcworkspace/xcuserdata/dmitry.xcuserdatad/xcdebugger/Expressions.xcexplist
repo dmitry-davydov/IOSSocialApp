@@ -3,17 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "AvatarView.draw(_:):AvatarView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "FriendsTableViewController.tableView(_:numberOfRowsInSection:):FriendsTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexedUsers.keys">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "FriendsTableViewController.tableView(_:titleForHeaderInSection:):FriendsTableViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -22,10 +11,59 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "AvatarView.init(coder:):AvatarView.swift">
+         contextName = "FriendsTableViewController.indexUsers(_:):FriendsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.name.contains(st)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "FriendsTableViewController.indexUsers():FriendsTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.draw(_:):AvatarView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "UINavigationControllerPullDownPopAnimator.animateTransition(using:):UINavigationControllerPullDownPopAnimator.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "destination.view.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FriendsTableViewController.viewDidLoad():FriendsTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.clearSubviews():AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "subviews">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.init(coder:):AvatarView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.setImage(_:):AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "superview!.bounds">
+            </PersistentString>
+            <PersistentString
+               value = "self.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AvatarView.prepareImage():AvatarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "iView.bounds">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "GroupsViewController.tableView(_:didSelectRowAt:):GroupsViewController.swift">
@@ -39,40 +77,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "AvatarView.prepareImage():AvatarView.swift">
+         contextName = "FriendsTableViewController.tableView(_:numberOfRowsInSection:):FriendsTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "iView.bounds">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsTableViewController.indexUsers(_:):FriendsTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.name.contains(st)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "AvatarView.clearSubviews():AvatarView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "subviews">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "FriendsTableViewController.viewDidLoad():FriendsTableViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "AvatarView.setImage(_:):AvatarView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "superview!.bounds">
-            </PersistentString>
-            <PersistentString
-               value = "self.bounds">
+               value = "indexedUsers.keys">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

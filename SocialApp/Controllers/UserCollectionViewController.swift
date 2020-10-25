@@ -7,9 +7,21 @@
 
 import UIKit
 
-class UserCollectionViewController: UICollectionViewController {
+class UserCollectionViewController: UICollectionViewController, UINavigationControllerDelegate {
 
     var userImage: UIImage?
+    var interactiveTransition = SocialAppInteractiveTransition()
+    
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactiveTransition.hasStarted ? interactiveTransition : nil
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationController?.delegate = self
+        interactiveTransition.viewController = self
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
@@ -22,4 +34,14 @@ class UserCollectionViewController: UICollectionViewController {
         
         return cell
     }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .pop {
+            return UINavigationControllerPullDownPopAnimator()
+        }
+                
+        return nil
+    }
 }
+
+
