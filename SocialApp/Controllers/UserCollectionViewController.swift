@@ -7,20 +7,15 @@
 
 import UIKit
 
-class UserCollectionViewController: UICollectionViewController, UINavigationControllerDelegate {
+class UserCollectionViewController: UICollectionViewController {
 
     var userImage: UIImage?
-    var interactiveTransition = SocialAppInteractiveTransition()
-    
-    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return interactiveTransition.hasStarted ? interactiveTransition : nil
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.delegate = self
-        interactiveTransition.viewController = self
+//        self.navigationController?.delegate = self
+//        interactiveTransition.viewController = self
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -33,14 +28,6 @@ class UserCollectionViewController: UICollectionViewController, UINavigationCont
         cell.avatarView.image = userImage!
         
         return cell
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .pop {
-            return UINavigationControllerPullDownPopAnimator()
-        }
-                
-        return nil
     }
 }
 

@@ -31,7 +31,7 @@ class SocialAppInteractiveTransition: UIPercentDrivenInteractiveTransition {
             let progress = max(0, min(1, relativeTranslation))
             
             self.shouldFinish = progress > 0.33
-            
+
             self.update(progress)
         case .ended:
             self.hasStarted = false
