@@ -14,15 +14,27 @@ class UserTableCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var avatarView: AvatarView!
     
+    var cellAnimation = ScaleViewCellAnimation()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        cellAnimation.animationView = avatarView
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+        if selected {
+            cellAnimation.startOutAnimation(complete: {super.setSelected(selected, animated: animated)})
+            
+            return
+        }
+        
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if !highlighted { return }
+        cellAnimation.startInAnimation(complete: {})
+    }
 }

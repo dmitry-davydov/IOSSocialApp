@@ -9,10 +9,11 @@ import UIKit
 
 @IBDesignable class AvatarView: UIView {
 
-    private var _image: UIImage?
+    private weak var _image: UIImage?
     
-    @IBInspectable var image: UIImage? {
+    @IBInspectable weak var image: UIImage? {
         set {
+            _image = image
             setImage(newValue!)
         }
         get {
@@ -24,11 +25,14 @@ import UIKit
     @IBInspectable var shadowColor: UIColor = .black
     @IBInspectable var shadowOpacity: Float = 0.8
 
-    func setImage(_ image: UIImage) {
+    var imageSuperView: UIView?
+    var imageView: UIImageView?
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print("Alloc \(Date.init())" )
         
-        self._image = image
-        
-        let imageSuperView = UIView(frame: self.bounds)
+        imageSuperView = UIView(frame: self.bounds)
         let layer = CAShapeLayer()
         layer.path = UIBezierPath.init(ovalIn: self.bounds).cgPath
         layer.shadowColor = self.shadowColor.cgColor
@@ -36,28 +40,41 @@ import UIKit
         layer.shadowRadius = CGFloat(self.shadowRadius)
         layer.shadowOffset = .zero
         layer.masksToBounds = false
-        imageSuperView.layer.addSublayer(layer)
+        imageSuperView!.layer.addSublayer(layer)
         
         
-        let iView = UIImageView(image: image)
-        iView.clipsToBounds = true
-        iView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-        iView.layer.masksToBounds = true
-        iView.layer.cornerRadius = CGFloat(self.frame.width) / 2
+        imageView = UIImageView()
+        
+        imageView!.clipsToBounds = true
+        imageView!.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        imageView!.layer.masksToBounds = true
+        imageView!.layer.cornerRadius = CGFloat(self.frame.width) / 2
         
         
-        imageSuperView.addSubview(iView)
+        imageSuperView!.addSubview(imageView!)
         
-        self.addSubview(imageSuperView)
+        self.addSubview(imageSuperView!)
+    }
+    
+    deinit {
+        imageSuperView = nil
+    }
+    
+    
+    
+    func setImage(_ image: UIImage) {
+        imageView?.image = image
+        
     }
     
     func clearSubviews() {
         subviews.forEach({v in
             v.removeFromSuperview()
         })
-        _image = nil
         
-        print("removed")
+        _image = nil
+        imageSuperView = nil
+        imageView = nil
     }
     
     func loadFrom(url: URL) {
