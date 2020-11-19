@@ -32,7 +32,17 @@ class NewsItemTableViewController: UITableViewController {
         }
     
         cell.prepareCell(newsItem)
+        
+        cell.newsItemImage.isUserInteractionEnabled = true
+        cell.newsItemImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
+        
 
         return cell
+    }
+    
+    @objc func imageTapped(_ recognizer: UITapGestureRecognizer) {
+        print("tapped")
+        performSegue(withIdentifier: "ImageSliderSegue", sender: nil)
+        
     }
 }

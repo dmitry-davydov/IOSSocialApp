@@ -11,6 +11,13 @@ class UserCollectionViewController: UICollectionViewController {
 
     var userImage: UIImage?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        self.navigationController?.delegate = self
+//        interactiveTransition.viewController = self
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -23,3 +30,5 @@ class UserCollectionViewController: UICollectionViewController {
         return cell
     }
 }
+
+
