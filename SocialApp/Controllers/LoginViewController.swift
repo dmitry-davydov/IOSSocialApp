@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var loginButtonOutlet: UIButton!
+    @IBOutlet weak var loginButtonOutlet: LoadingUIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
@@ -81,12 +81,12 @@ class LoginViewController: UIViewController {
         self.scrollView?.endEditing(true)
     }
     
-    @IBAction func onSubmitTouchUpInside(_ sender: UIButton) {
+    @IBAction func onSubmitTouchUpInside(_ sender: LoadingUIButton) {
         
         self.timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(self.login), userInfo: nil, repeats: false)
         DispatchQueue.main.async {
             sender.isEnabled = false
-            sender.setTitle("Loading", for: .normal)
+            sender.startLoading()
         }
     }
     
@@ -96,6 +96,7 @@ class LoginViewController: UIViewController {
         DispatchQueue.main.async {
             self.loginButtonOutlet.isEnabled = true
             self.loginButtonOutlet.setTitle(self.originalButtonText, for: .normal)
+            self.loginButtonOutlet.endLoading()
         }
         
         guard let usernameText = username.text else { alertWrongLoginOrPassword(); return ;}
@@ -105,8 +106,6 @@ class LoginViewController: UIViewController {
             navigateToEntryPoint()
             return
         }
-        
-        
     }
     
     private func alertWrongLoginOrPassword() {

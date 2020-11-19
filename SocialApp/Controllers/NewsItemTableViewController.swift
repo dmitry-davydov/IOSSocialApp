@@ -11,6 +11,7 @@ class NewsItemTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delaysContentTouches = false
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,7 +32,17 @@ class NewsItemTableViewController: UITableViewController {
         }
     
         cell.prepareCell(newsItem)
+        
+        cell.newsItemImage.isUserInteractionEnabled = true
+        cell.newsItemImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
+        
 
         return cell
+    }
+    
+    @objc func imageTapped(_ recognizer: UITapGestureRecognizer) {
+        print("tapped")
+        performSegue(withIdentifier: "ImageSliderSegue", sender: nil)
+        
     }
 }
