@@ -46,4 +46,10 @@ extension UIView{
     }
 }
 
+extension Int {
+    func asString() -> String {
+        return "\(self)"
+    }
+}
+
 

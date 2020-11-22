@@ -6,118 +6,68 @@
 //
 
 import UIKit
+import WebKit
 
 class LoginViewController: UIViewController {
 
-    var loginService: LoginService?
-    var isPerformingLoggingIn: Bool = false
-    var timer: Timer?
-    var originalButtonText: String?
-    
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var loginButtonOutlet: LoadingUIButton!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var webView: WKWebView! {
+        didSet {
+            webView.navigationDelegate = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DispatchQueue.global(qos: .background).async {
-            self.loginService = LoginService()
-        }
-        
-        self.prepareUI()
-        
-        username.text = "1"
-        password.text = "1"
-        
-        scrollView?.contentInset = UIEdgeInsets.zero
-        scrollView?.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        let request = URLRequest(url: LoginService.shared.oAuthLoginUrl().url!)
+        webView.load(request)
     }
     
-    private func prepareUI() {
-        self.scrollView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard)))
-        self.loginButtonOutlet.layer.cornerRadius = 5
-        self.originalButtonText = self.loginButtonOutlet.currentTitle
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func keyboardWasShown(notification: Notification) {
-
-        guard let sv = self.scrollView else {return}
-        
-        // ревью такое проходит?
-        // выделил память только 1 раз?
-        let keyboardHeight = ((notification.userInfo! as NSDictionary).value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size.height
-
-        // автоматически скролим так, чтобы инпуты отображались по середине
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-        
-        sv.contentInset = contentInsets
-        sv.scrollIndicatorInsets = contentInsets
-        sv.setContentOffset(CGPoint(x: 0, y: contentInsets.bottom / 2), animated: true)
-        
-    }
-    
-    @objc func keyboardWillBeHidden(notification: Notification) {
-        scrollView?.contentInset = UIEdgeInsets.zero
-        scrollView?.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-    }
-    
-    @objc func hideKeyboard() {
-        self.scrollView?.endEditing(true)
-    }
-    
-    @IBAction func onSubmitTouchUpInside(_ sender: LoadingUIButton) {
-        
-        self.timer = Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(self.login), userInfo: nil, repeats: false)
-        DispatchQueue.main.async {
-            sender.isEnabled = false
-            sender.startLoading()
-        }
-    }
-    
-    @objc func login() {
-        self.timer?.invalidate()
-        
-        DispatchQueue.main.async {
-            self.loginButtonOutlet.isEnabled = true
-            self.loginButtonOutlet.setTitle(self.originalButtonText, for: .normal)
-            self.loginButtonOutlet.endLoading()
-        }
-        
-        guard let usernameText = username.text else { alertWrongLoginOrPassword(); return ;}
-        guard let passwordText = password.text else { alertWrongLoginOrPassword(); return ;}
-        
-        if loginService!.performLogin(username: usernameText, password: passwordText) {
-            navigateToEntryPoint()
-            return
-        }
-    }
-    
-    private func alertWrongLoginOrPassword() {
-        let alert = UIAlertController(title: "Error", message: "Login or Password invalid", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
     
     private func navigateToEntryPoint() {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabViewController") as! TabViewController
+        
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabViewController") as! TabViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DemoViewController") as! DemoViewController
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension LoginViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        
+        guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
+            decisionHandler(.allow)
+            return
+        }
+        
+        let params = fragment
+            .components(separatedBy: "&")
+            .map { $0.components(separatedBy: "=") }
+            .reduce([String: String]()) { result, param in
+                var dict = result
+                let key = param[0]
+                let value = param[1]
+                dict[key] = value
+                return dict
+            }
+        
+        decisionHandler(.cancel)
+        
+        if let token = params["access_token"] {
+            LoginService.shared.setAuthToken(token)
+            navigateToEntryPoint()
+        }
+    }
 }
