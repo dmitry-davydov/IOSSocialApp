@@ -12,6 +12,8 @@ enum GroupType: String {
     case group, page, event
 }
 
+
+
 class Groups: VKClient {
     
     private enum Methods: VKMethod {

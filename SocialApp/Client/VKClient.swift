@@ -10,8 +10,29 @@ import Alamofire
 
 typealias VKMethod = String
 
+extension Session {
+    static let custom: Session = {
+        var configuration = URLSessionConfiguration.default
+        var monitors: [EventMonitor] = []
+        #if DEBUG
+        let monitor = ClosureEventMonitor()
+        
+        monitor.requestDidFinish = {request in
+            debugPrint(request)
+        }
+        
+        monitors.append(monitor)
+        
+        #endif
+        
+        return Session(configuration: configuration, eventMonitors: monitors)
+    }()
+}
+
 class VKClient {
     private let version = "5.126"
+    
+    lazy var session = Session.custom
     
     func buildUrl(for method: VKMethod, params: Parameters?) -> URLComponents {
         var urlComponents = URLComponents()
