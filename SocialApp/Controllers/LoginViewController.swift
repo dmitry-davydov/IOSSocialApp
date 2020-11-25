@@ -36,8 +36,8 @@ class LoginViewController: UIViewController {
     
     private func navigateToEntryPoint() {
         
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabViewController") as! TabViewController
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DemoViewController") as! DemoViewController
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TabViewController") as! TabViewController
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "DemoViewController") as! DemoViewController
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

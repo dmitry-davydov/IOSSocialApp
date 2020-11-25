@@ -10,6 +10,15 @@ import Alamofire
 
 typealias VKMethod = String
 
+protocol RequestProtocol {
+    func asParameters() -> Parameters
+}
+
+struct VKResponse<T, E> {
+    var response: T?
+    var error: E?
+}
+
 extension Session {
     static let custom: Session = {
         var configuration = URLSessionConfiguration.default
@@ -18,8 +27,18 @@ extension Session {
         let monitor = ClosureEventMonitor()
         
         monitor.requestDidFinish = {request in
+            print("======================")
+            print("REQUEST: ")
             debugPrint(request)
+            print("======================")
         }
+        
+//        monitor.response = {(request, response) in
+//            print("======================")
+//            print("RESPONSE: ")
+//            debugPrint(response.value)
+//            print("======================")
+//        }
         
         monitors.append(monitor)
         

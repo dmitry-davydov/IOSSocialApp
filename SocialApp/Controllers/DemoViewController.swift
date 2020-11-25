@@ -23,7 +23,17 @@ class DemoViewController: UIViewController {
     }
     @IBAction func getGroupsAction(_ button: UIButton) {
         let groupsEndpoint = Groups()
-        groupsEndpoint.currentUserGroups()
+        
+        groupsEndpoint.get(request: GroupsGetRequest()) { (response) in
+            
+            if let error = response.error {
+                print(error)
+                return
+            }
+            
+            print(response.response)
+            
+        }
     }
     @IBAction func getGroupsSearchAction(_ button: UIButton) {
         let groupsEndpoint = Groups()

@@ -14,12 +14,14 @@ class Users: VKClient {
         case followers = "users.getFollowers"
     }
     
-    func getFollowers() {
+    func getFollowers() -> UserSubscriptionsResonse? {
         let requestUrl = buildUrl(for: Method.followers.rawValue, params: [
             "fields": "photo_100,online,last_seen,screen_name"
         ])
         
-        
+        var userResponse: UserSubscriptionsResonse? = nil
+        let dg = DispatchGroup()
+        dg.enter()
         self
             .session
             .request(requestUrl.url!)
@@ -37,20 +39,24 @@ class Users: VKClient {
                             
                         }
                         
-                        let userResponse = try JSONDecoder().decode(UserSubscriptionsResonse.self, from: data)
+                        userResponse = try JSONDecoder().decode(UserSubscriptionsResonse.self, from: data)
                         
                         debugPrint(userResponse)
                     } catch let DecodingError.keyNotFound(key, context) {
                         print("Key '\(key)' not found:", context.debugDescription)
                         print("codingPath:", context.codingPath)
-                        
                     } catch let err as NSError {
                         debugPrint(err)
                         print("Failed to load: \(err.localizedDescription)")
                     }
+                    dg.leave()
                 case .failure(let err):
                     print("Request error: \(err.localizedDescription)")
                 }
             }
+        
+        dg.wait()
+        
+        return userResponse
     }
 }

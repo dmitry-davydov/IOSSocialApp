@@ -42,5 +42,33 @@ class Groups: VKClient {
             print(response.value)
         }
     }
+    
+    func get(request parameters: GroupsGetRequest, completion: @escaping (VKResponse<GroupsGetResponse?, Error?>) -> Void) {
+        let requestUrl = buildUrl(for: Methods.get.rawValue, params: parameters.asParameters())
+        
+        self
+            .session
+            .request(requestUrl.url!)
+            .responseData { (response) in
+                
+                switch response.result {
+                case .success(_):
+                    do {
+                        guard let data = response.data else { return }
+                        debugPrint(response.value)
+                        let groupsGetResponse = try JSONDecoder().decode(GroupsGetResponse.self, from: data)
+                        completion(VKResponse(response: groupsGetResponse, error: nil))
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        completion(VKResponse(response: nil, error: DecodingError.keyNotFound(key, context)))
+                    } catch let err as NSError {
+                        print("TUT")
+                        completion(VKResponse(response: nil, error: err))
+                    }
+                    
+                case .failure(let err):
+                    completion(VKResponse(response: nil, error: err))
+                }
+            }
+    }
 }
 

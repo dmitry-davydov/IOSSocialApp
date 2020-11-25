@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias UserID = Int
+
 struct UserCareerDto: Codable {
     // идентификатор сообщества (если доступно, иначе company);
     var groupId: Int
@@ -371,7 +373,7 @@ struct University: Codable {
 
 struct UserDto: Codable {
     // идентификатор пользователя
-    var id: Int
+    var id: UserID
     
     // имя
     var firstName: String
