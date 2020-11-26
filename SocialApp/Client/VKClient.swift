@@ -71,4 +71,29 @@ class VKClient {
         
         return urlComponents
     }
+    
+    func performRequest<T>(url: URL, decode to: T.Type, completion handler: @escaping (VKResponse<T?, Error?>) -> Void) where T: Decodable {
+        
+        session
+            .request(url)
+            .responseData { (response) in
+                
+                switch response.result {
+                case .success(_):
+                    do {
+                        guard let data = response.data else { return }
+                        let groupsGetResponse = try JSONDecoder().decode(to, from: data)
+                        handler(VKResponse(response: groupsGetResponse, error: nil))
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        handler(VKResponse(response: nil, error: DecodingError.keyNotFound(key, context)))
+                    } catch let err as NSError {
+                        handler(VKResponse(response: nil, error: err))
+                    }
+                    
+                case .failure(let err):
+                    handler(VKResponse(response: nil, error: err))
+                }
+            }
+        
+    }
 }
