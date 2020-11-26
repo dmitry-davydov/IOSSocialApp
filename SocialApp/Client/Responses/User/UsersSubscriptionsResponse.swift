@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserSubscriptionsResonse: Decodable {
+struct UsersSubscriptionsResonse: Decodable {
     var count: Int
     var items: [UserDto]
     

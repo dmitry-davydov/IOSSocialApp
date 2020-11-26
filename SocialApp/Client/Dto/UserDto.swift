@@ -674,6 +674,11 @@ struct UserDto: Codable {
     // режим стены по умолчанию. Возможные значения: owner, all.
     var wallDefault: String?
     
+    //MARK: - computed
+    var fullName: String {
+        return "\(lastName) \(firstName)"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"

@@ -55,13 +55,11 @@ class Groups: VKClient {
                 case .success(_):
                     do {
                         guard let data = response.data else { return }
-                        debugPrint(response.value)
                         let groupsGetResponse = try JSONDecoder().decode(GroupsGetResponse.self, from: data)
                         completion(VKResponse(response: groupsGetResponse, error: nil))
                     } catch let DecodingError.keyNotFound(key, context) {
                         completion(VKResponse(response: nil, error: DecodingError.keyNotFound(key, context)))
                     } catch let err as NSError {
-                        print("TUT")
                         completion(VKResponse(response: nil, error: err))
                     }
                     

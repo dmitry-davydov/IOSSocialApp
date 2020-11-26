@@ -9,8 +9,7 @@ import UIKit
 
 class UserCollectionViewController: UICollectionViewController {
 
-    var userImage: UIImage?
-    
+    var user: UserDto!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +24,11 @@ class UserCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userImageCell", for: indexPath) as! UserCollectionViewCell
         
-        cell.avatarView.image = userImage!
+        if let userPhoto = user.photo100 {
+            cell.avatarView.loadFrom(url: URL(string: userPhoto)!)
+        }
+        
+        
         
         return cell
     }

@@ -11,43 +11,64 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var indexedUsers = [[User]]()
+    var indexedUsers = [[UserDto]]()
     var sections = [String]()
+    
+    var userFollowers: UsersFollowersResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delaysContentTouches = false
         searchBar.delegate = self
+        fetchUserFollowers()
         
-        indexUsers(nil)
+    }
+    
+    private func fetchUserFollowers() {
+        let userEndpoint = Users()
+        let requestObject = UsersFollowersRequest(userId: nil, offset: 0, count: nil, fields: [.nickname, .photo100], nameCase: .nom)
+        
+        userEndpoint.getFollowers(request: requestObject) { response in
+            if let err = response.error {
+                debugPrint(err)
+                return
+            }
+            
+            guard let userResponse = response.response else { return }
+            
+            self.userFollowers = userResponse
+            self.indexUsers(nil)
+            self.tableView.reloadData()
+        }
     }
 
     private func indexUsers(_ st: String?) {
-        
+
         var searchText = st
-        
+
         if searchText != nil && searchText?.count == 0 {
             searchText = nil
         }
+
+        guard let users = userFollowers?.items else { return }
         
-        let data = FriendsDataProvider.instance.getData()
-        
-        for user in data {
+
+        for user in users {
             
             if let st = searchText {
-                if !user.name.contains(st) { continue }
+                if !user.fullName.contains(st) { continue }
             }
-            
-            let firstLetter = String(user.name.first!)
-    
+
+            let firstLetter = String(user.fullName.first!)
+
             let indexOfLetter = sections.firstIndex(of: firstLetter)
-            
+
             if indexOfLetter == nil {
                 sections.append(firstLetter)
                 indexedUsers.append([user])
                 continue
             }
-            
+
             indexedUsers[indexOfLetter!].append(user)
         }
     }
@@ -72,13 +93,10 @@ class FriendsTableViewController: UITableViewController {
 
         let user = indexedUsers[indexPath.section][indexPath.row]
         cell.user = user
-        cell.name.text = user.name
+        cell.name.text = user.fullName
         
-        if let img = user.imageInstance {
-            cell.avatarView.setImage(img)
-        } else {
-            cell.avatarView.loadFrom(url: user.getImageURL())
-        }
+        cell.avatarView.loadFrom(url: URL(string: user.photo100!)!)
+        
         
         return cell
     }
@@ -89,11 +107,8 @@ class FriendsTableViewController: UITableViewController {
         let destintaion = segue.destination as! UserCollectionViewController
         
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
-        
         let selectedUser = indexedUsers[selectedIndexPath.section][selectedIndexPath.row]
-        
-        destintaion.userImage = selectedUser.imageInstance
-        destintaion.title = cell.user!.name
+        destintaion.user = selectedUser
     }
 
 }
@@ -101,7 +116,7 @@ class FriendsTableViewController: UITableViewController {
 extension FriendsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         sections = [String]()
-        indexedUsers = [[User]]()
+        indexedUsers = [[UserDto]]()
         indexUsers(searchText)
         self.tableView.reloadData()
         

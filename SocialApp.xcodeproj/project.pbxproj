@@ -10,6 +10,8 @@
 		0A0193CE252A0956006977E3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0193CD252A0956006977E3 /* User.swift */; };
 		0A0193D2252A19E1006977E3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0193D1252A19E1006977E3 /* Group.swift */; };
 		0A0193DD252A237B006977E3 /* MemoryDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0193DC252A237B006977E3 /* MemoryDataProvider.swift */; };
+		0A128FB02570165A0005716A /* UsersFollowersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A128FAF2570165A0005716A /* UsersFollowersRequest.swift */; };
+		0A128FB325701C570005716A /* UsersFollowersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A128FB225701C570005716A /* UsersFollowersResponse.swift */; };
 		0A1A3F142527A33300235937 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F132527A33300235937 /* FriendsTableViewController.swift */; };
 		0A1A3F172527A35C00235937 /* UserGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F162527A35C00235937 /* UserGroupsTableViewController.swift */; };
 		0A1A3F1A2527A75000235937 /* UserTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3F192527A75000235937 /* UserTableCell.swift */; };
@@ -27,7 +29,7 @@
 		0A3A5E6225474D9800F255BF /* SocialAppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A5E6125474D9800F255BF /* SocialAppNavigationController.swift */; };
 		0A3B8FE82524FF2C003D4939 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3B8FE72524FF2C003D4939 /* LoginService.swift */; };
 		0A565087253B6F6400FF7018 /* LoadingUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A565086253B6F6400FF7018 /* LoadingUIButton.swift */; };
-		0A67CEA5256DAADB00439417 /* UserSubscriptionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67CEA4256DAADB00439417 /* UserSubscriptionsResponse.swift */; };
+		0A67CEA5256DAADB00439417 /* UsersSubscriptionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A67CEA4256DAADB00439417 /* UsersSubscriptionsResponse.swift */; };
 		0A6B29BA2542047E00415CAD /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B29B92542047E00415CAD /* ImageViewController.swift */; };
 		0A734A9E25379E200092F1CB /* FriendsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A734A9D25379E200092F1CB /* FriendsDataProvider.swift */; };
 		0A734AA125379F2C0092F1CB /* UserGroupsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A734AA025379F2C0092F1CB /* UserGroupsStorage.swift */; };
@@ -68,6 +70,8 @@
 		0A0193CD252A0956006977E3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0A0193D1252A19E1006977E3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		0A0193DC252A237B006977E3 /* MemoryDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDataProvider.swift; sourceTree = "<group>"; };
+		0A128FAF2570165A0005716A /* UsersFollowersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFollowersRequest.swift; sourceTree = "<group>"; };
+		0A128FB225701C570005716A /* UsersFollowersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFollowersResponse.swift; sourceTree = "<group>"; };
 		0A1A3F132527A33300235937 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		0A1A3F162527A35C00235937 /* UserGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsTableViewController.swift; sourceTree = "<group>"; };
 		0A1A3F192527A75000235937 /* UserTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableCell.swift; sourceTree = "<group>"; };
@@ -87,7 +91,7 @@
 		0A3A5E6125474D9800F255BF /* SocialAppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAppNavigationController.swift; sourceTree = "<group>"; };
 		0A3B8FE72524FF2C003D4939 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		0A565086253B6F6400FF7018 /* LoadingUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingUIButton.swift; sourceTree = "<group>"; };
-		0A67CEA4256DAADB00439417 /* UserSubscriptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionsResponse.swift; sourceTree = "<group>"; };
+		0A67CEA4256DAADB00439417 /* UsersSubscriptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersSubscriptionsResponse.swift; sourceTree = "<group>"; };
 		0A6B29B92542047E00415CAD /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		0A734A9D25379E200092F1CB /* FriendsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDataProvider.swift; sourceTree = "<group>"; };
 		0A734AA025379F2C0092F1CB /* UserGroupsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGroupsStorage.swift; sourceTree = "<group>"; };
@@ -169,6 +173,14 @@
 			path = DataProviders;
 			sourceTree = "<group>";
 		};
+		0A128FAE257016420005716A /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				0A128FAF2570165A0005716A /* UsersFollowersRequest.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
 		0A2EE151251FAF35009AECA1 = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +241,8 @@
 		0A67CEA3256DAAC300439417 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				0A67CEA4256DAADB00439417 /* UserSubscriptionsResponse.swift */,
+				0A67CEA4256DAADB00439417 /* UsersSubscriptionsResponse.swift */,
+				0A128FB225701C570005716A /* UsersFollowersResponse.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -281,6 +294,7 @@
 		0AE675C7256ED83600867FEB /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				0A128FAE257016420005716A /* Users */,
 				0AE675D2256EE3E700867FEB /* Groups */,
 				0AE675C8256ED84100867FEB /* Photos */,
 			);
@@ -478,7 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A8572E9256300050071C029 /* UserSession.swift in Sources */,
-				0A67CEA5256DAADB00439417 /* UserSubscriptionsResponse.swift in Sources */,
+				0A67CEA5256DAADB00439417 /* UsersSubscriptionsResponse.swift in Sources */,
 				0A0193D2252A19E1006977E3 /* Group.swift in Sources */,
 				0A1A3F142527A33300235937 /* FriendsTableViewController.swift in Sources */,
 				0AE675DA256EE7DE00867FEB /* GroupsGetResponse.swift in Sources */,
@@ -492,6 +506,7 @@
 				0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */,
 				0A734AA42537A00E0092F1CB /* GroupsStorage.swift in Sources */,
 				0A1A3F1A2527A75000235937 /* UserTableCell.swift in Sources */,
+				0A128FB325701C570005716A /* UsersFollowersResponse.swift in Sources */,
 				0A1A3F172527A35C00235937 /* UserGroupsTableViewController.swift in Sources */,
 				0A565087253B6F6400FF7018 /* LoadingUIButton.swift in Sources */,
 				0AF5BF9E256C2FB20040E81A /* PhotoDto.swift in Sources */,
@@ -507,6 +522,7 @@
 				0A0193DD252A237B006977E3 /* MemoryDataProvider.swift in Sources */,
 				0AF5BF9A256C24B70040E81A /* UserDto.swift in Sources */,
 				0AE8BD30256A7BF300B28C72 /* Users.swift in Sources */,
+				0A128FB02570165A0005716A /* UsersFollowersRequest.swift in Sources */,
 				0A734AA125379F2C0092F1CB /* UserGroupsStorage.swift in Sources */,
 				0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */,
 				0A7C6553253A23080000AFF3 /* NewsItemTableViewCell.swift in Sources */,
