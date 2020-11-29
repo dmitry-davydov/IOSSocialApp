@@ -34,7 +34,7 @@ struct WallGetRequest: RequestProtocol {
         ]
         
         if let ownerId = ownerId {
-            params["owner_id"] = ownerId
+            params["owner_id"] = ownerId.asString()
         }
         
         if let domain = domain {

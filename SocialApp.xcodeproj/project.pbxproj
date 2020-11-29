@@ -43,6 +43,7 @@
 		0A7C6556253A23640000AFF3 /* GroupNewsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6555253A23640000AFF3 /* GroupNewsDataProvider.swift */; };
 		0A7C6559253A23830000AFF3 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6558253A23830000AFF3 /* NewsItem.swift */; };
 		0A7C655C253A2B900000AFF3 /* NewsItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C655B253A2B900000AFF3 /* NewsItemTableViewController.swift */; };
+		0A7F1DBD2572F08500DC2455 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F1DBC2572F08500DC2455 /* Attachment.swift */; };
 		0A8572E9256300050071C029 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8572E8256300050071C029 /* UserSession.swift */; };
 		0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99F40E2524FB4A00221793 /* LoginViewController.swift */; };
 		0AD97CBB252BADB30080779C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBA252BADB30080779C /* Extensions.swift */; };
@@ -108,6 +109,7 @@
 		0A7C6555253A23640000AFF3 /* GroupNewsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupNewsDataProvider.swift; sourceTree = "<group>"; };
 		0A7C6558253A23830000AFF3 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		0A7C655B253A2B900000AFF3 /* NewsItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemTableViewController.swift; sourceTree = "<group>"; };
+		0A7F1DBC2572F08500DC2455 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		0A8572E8256300050071C029 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		0A99F40E2524FB4A00221793 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AD97CBA252BADB30080779C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				0AF5BFA5256D98350040E81A /* GroupItemDto.swift */,
 				0AF5BFA8256D9F4D0040E81A /* GeoDto.swift */,
 				0AE675CC256EE18F00867FEB /* AlbumDto.swift */,
+				0A7F1DBC2572F08500DC2455 /* Attachment.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */,
 				0A7C6553253A23080000AFF3 /* NewsItemTableViewCell.swift in Sources */,
 				0A3B8FE82524FF2C003D4939 /* LoginService.swift in Sources */,
+				0A7F1DBD2572F08500DC2455 /* Attachment.swift in Sources */,
 				0A734AAC2537AA190092F1CB /* GroupCell.swift in Sources */,
 				0AF5BFA9256D9F4D0040E81A /* GeoDto.swift in Sources */,
 				0AD97CBB252BADB30080779C /* Extensions.swift in Sources */,

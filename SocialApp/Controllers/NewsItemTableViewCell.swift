@@ -17,11 +17,7 @@ class NewsItemTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         likeUiButton.delegate = self
-        
-        
     }
-    
-    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -29,16 +25,20 @@ class NewsItemTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func prepareCell(_ newsItem: NewsItem) {
-        title.text = newsItem.title
+    func prepareCell(_ newsItem: GroupItemDto) {
+        title.text = newsItem.text
         
-        if let url = URL(string: newsItem.imageUrl) {
-            newsItemImage.loadFrom(url: url)
+        if let attachments = newsItem.attachments, attachments.count > 0 {
+            for attachment in attachments {
+                var t = 1
+            }
         }
         
-        viewedCount.text = String(newsItem.viewedCount)
-        likeUiButton.counterValue = newsItem.likesCount
-        likeUiButton.isLiked = newsItem.isLiked
+        viewedCount.text = String(newsItem.views.count)
+        likeUiButton.counterValue = newsItem.likes.count
+        if let isUserLiked = newsItem.likes.userLikes {
+            likeUiButton.isLiked = isUserLiked == 1 ? true : false
+        }
     }
 }
 

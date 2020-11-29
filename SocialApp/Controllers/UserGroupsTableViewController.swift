@@ -78,16 +78,16 @@ class UserGroupsTableViewController: UITableViewController {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "GroupSegue" {
-//            guard let vc = segue.destination as? NewsItemTableViewController else { return }
-//
-//            guard let userGroup = GroupsDataProvider.instance.userGroups[self.tableView.indexPathForSelectedRow!.row] else {
-//                fatalError("Could not find user group")
-//            }
-//
-//            vc.title = userGroup.name
-//
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GroupSegue" {
+            guard let vc = segue.destination as? NewsItemTableViewController else { return }
+
+            guard let userGroup = self.userGroupsResponse?.items[self.tableView.indexPathForSelectedRow!.row] else {
+                fatalError("Could not find user group")
+            }
+
+            vc.ownerId = userGroup.id
+            vc.title = userGroup.name
+        }
+    }
 }

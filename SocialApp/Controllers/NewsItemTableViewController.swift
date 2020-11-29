@@ -8,7 +8,35 @@
 import UIKit
 
 class NewsItemTableViewController: UITableViewController {
-
+    
+    var response: WallGetResponse?
+    
+    var ownerId: Int! {
+        didSet {
+            loadWall()
+        }
+    }
+    
+    var numbersOfRow: Int {
+        return response?.items.count ?? 0
+    }
+    
+    private func loadWall() {
+        let request = WallGetRequest(ownerId: -ownerId, domain: nil, offset: 0, count: nil, filter: .all, extended: false)
+        let endpoint = Wall()
+        endpoint.get(request: request, completion: { response in
+            if let err = response.error {
+                print(err)
+                return
+            }
+            
+            if let wallGetResponse = response.response {
+                self.response = wallGetResponse
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delaysContentTouches = false
@@ -19,7 +47,7 @@ class NewsItemTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GroupNewsDataProvider.instance.count
+        return self.numbersOfRow
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -27,7 +55,7 @@ class NewsItemTableViewController: UITableViewController {
             fatalError("Can not cast TableViewCell to NewsItemTableViewCell")
         }
 
-        guard let newsItem = GroupNewsDataProvider.instance[indexPath.row] else {
+        guard let newsItem = self.response?.items[indexPath.row] else {
             fatalError("Can not fetch new item")
         }
     

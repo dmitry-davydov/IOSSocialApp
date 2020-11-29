@@ -14,11 +14,11 @@ struct GroupItemComments: Codable {
     var canPost: Int?
     
     // информация о том, могут ли сообщества комментировать запись;
-    var groupsCanPost: Int
+    var groupsCanPost: Bool?
     // может ли текущий пользователь закрыть комментарии к записи;
-    var canClose: Bool
+    var canClose: Bool?
     // может ли текущий пользователь открыть комментарии к записи.
-    var canOpen: Bool
+    var canOpen: Bool?
     
     enum CodingKeys: String, CodingKey {
         case count
@@ -27,6 +27,13 @@ struct GroupItemComments: Codable {
         case canClose = "can_close"
         case canOpen = "can_open"
     }
+}
+
+struct GroupItemCopyright: Decodable {
+    var id: Int?
+    var link: String
+    var type: String
+    var name: String
 }
 
 struct GroupItemLikes: Codable {
@@ -59,7 +66,7 @@ struct GroupItemViews: Codable {
     var count: Int
 }
 
-struct GroupItemDto: Codable {
+struct GroupItemDto: Decodable {
     // идентификатор записи.
     var id: Int
     
@@ -70,7 +77,7 @@ struct GroupItemDto: Codable {
     var fromId: Int
     
     // идентификатор администратора, который опубликовал запись (возвращается только для сообществ при запросе с ключом доступа администратора). Возвращается в записях, опубликованных менее 24 часов назад.
-    var createdBy: Int
+    var createdBy: Int?
     
     // время публикации записи в формате unixtime.
     var date: Int
@@ -79,19 +86,19 @@ struct GroupItemDto: Codable {
     var text: String
     
     // идентификатор владельца записи, в ответ на которую была оставлена текущая.
-    var replyOwnerId: Int
+    var replyOwnerId: Int?
     
     // идентификатор записи, в ответ на которую была оставлена текущая.
-    var replyPostId: Int
+    var replyPostId: Int?
     
     // 1, если запись была создана с опцией «Только для друзей».
-    var friendsOnly: Int
+    var friendsOnly: Int?
     
     // информация о комментариях к записи
-    var comments: GroupItemComments
+    var comments: GroupItemComments?
     
     // источник материала.
-    var copyright: String
+    var copyright: GroupItemCopyright?
     
     // информация о лайках к записи
     var likes: GroupItemLikes
@@ -106,13 +113,13 @@ struct GroupItemDto: Codable {
     var postType: String
     
     // медиавложения записи (фотографии, ссылки и т.п.). Описание массива attachments находится на отдельной странице.
-    // attachments
+    var attachments: [Attachment]?
     
     // информация о местоположении
-    var geo: Geo
+    var geo: Geo?
     
     // идентификатор автора, если запись была опубликована от имени сообщества и подписана пользователем;
-    var signerId: Int
+    var signerId: Int?
     
     // массив, содержащий историю репостов для записи.
     // Возвращается только в том случае, если запись является репостом.
@@ -120,22 +127,22 @@ struct GroupItemDto: Codable {
     // copy_history
     
     // информация о том, может ли текущий пользователь закрепить запись (1 — может, 0 — не может).
-    var canPin: Int
+    var canPin: Int?
     
     // информация о том, может ли текущий пользователь удалить запись (1 — может, 0 — не может).
-    var canDelete: Int
+    var canDelete: Int?
     
     // информация о том, может ли текущий пользователь редактировать запись (1 — может, 0 — не может).
-    var canEdit: Int
+    var canEdit: Int?
     
     // информация о том, что запись закреплена.
-    var isPinned: Int
+    var isPinned: Int?
     
     // информация о том, содержит ли запись отметку "реклама" (1 — да, 0 — нет).
-    var markedAsAds: Int
+    var markedAsAds: Int?
     
     // true, если объект добавлен в закладки у текущего пользователя.
-    var isFavorite: Bool
+    var isFavorite: Bool?
     
     // информация о записи VK Donut:
     
@@ -164,6 +171,7 @@ struct GroupItemDto: Codable {
         case reposts
         case views
         case postType = "post_type"
+        case attachments
         case geo
         case signerId = "signer_id"
         case canPin = "can_pin"
