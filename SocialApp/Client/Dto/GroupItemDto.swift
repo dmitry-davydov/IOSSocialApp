@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct GroupItemComments: Codable {
     // количество комментариев;
@@ -66,24 +67,24 @@ struct GroupItemViews: Codable {
     var count: Int
 }
 
-struct GroupItemDto: Decodable {
+class GroupItemDto: Decodable {
     // идентификатор записи.
-    var id: Int
+    @objc dynamic  var id: Int
     
     // идентификатор владельца стены, на которой размещена запись. В версиях API ниже 5.7 это поле называется to_id.
-    var ownerId: Int
+    @objc dynamic  var ownerId: Int
     
     // идентификатор автора записи (от чьего имени опубликована запись).
-    var fromId: Int
+    @objc dynamic  var fromId: Int
     
     // идентификатор администратора, который опубликовал запись (возвращается только для сообществ при запросе с ключом доступа администратора). Возвращается в записях, опубликованных менее 24 часов назад.
     var createdBy: Int?
     
     // время публикации записи в формате unixtime.
-    var date: Int
+    @objc dynamic var date: Int
     
     // текст записи.
-    var text: String
+    @objc dynamic  var text: String
     
     // идентификатор владельца записи, в ответ на которую была оставлена текущая.
     var replyOwnerId: Int?
