@@ -48,6 +48,15 @@ extension Session {
     }()
 }
 
+extension Request {
+   public func debugLog() -> Self {
+      #if DEBUG
+         debugPrint(self)
+      #endif
+      return self
+   }
+}
+
 class VKClient {
     private let version = "5.126"
     
@@ -76,6 +85,7 @@ class VKClient {
         
         session
             .request(url)
+            .debugLog()
             .responseData { (response) in
                 
                 switch response.result {

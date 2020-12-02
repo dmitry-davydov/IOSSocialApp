@@ -61,11 +61,19 @@ class NewsItemTableViewController: UITableViewController {
     
         cell.prepareCell(newsItem)
         
-        cell.newsItemImage.isUserInteractionEnabled = true
-        cell.newsItemImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
-        
+//        cell.newsItemImage.isUserInteractionEnabled = true
+//        cell.newsItemImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
+//        
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "newsItemCell", for: indexPath) as? NewsItemTableViewCell else {
+            fatalError("Can not cast TableViewCell to NewsItemTableViewCell")
+        }
+        
+        cell.clear()
     }
     
     @objc func imageTapped(_ recognizer: UITapGestureRecognizer) {

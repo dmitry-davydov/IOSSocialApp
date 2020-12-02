@@ -221,12 +221,62 @@ struct AttachmentLink: Decodable {
     }
 }
 
+struct AttachmentDocAttachmentDoc: Decodable {
+    var id: Int
+    var ownerId: UserID
+    var title: String
+    var size: Int
+    var ext: String
+    var date: Int
+    var type: Int
+    var url: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case ownerId = "owner_id"
+        case title
+        case size
+        case ext
+        case date
+        case type
+        case url
+    }
+}
+
+struct AttachmentDocAttachment: Decodable {
+    var type: String
+    var doc: AttachmentDocAttachmentDoc
+}
+
+struct AttachmentDoc: Decodable {
+    var id: Int
+    var fromId: UserID?
+    var ownerId: UserID
+    var date: Int
+    var markedAsAds: Int?
+    var postType: String?
+    var text: String?
+    var attachments: [AttachmentDocAttachment]?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case fromId = "from_id"
+        case ownerId = "owner_id"
+        case date
+        case markedAsAds = "market_as_ads"
+        case postType = "post_type"
+        case text
+        case attachments
+    }
+}
+
 enum Attachment {
     case photo(AttachmentPhoto)
     case postedPhoto(AttachmentPostedPhoto)
     case video(AttachmentVideo)
     case audio(AttachmentAudio)
     case link(AttachmentLink)
+    case doc(AttachmentDoc)
     
     enum type: String, Decodable {
         case photo
@@ -234,6 +284,7 @@ enum Attachment {
         case video
         case audio
         case link
+        case doc
     }
 }
 
@@ -246,6 +297,7 @@ extension Attachment: Decodable {
         case video
         case audio
         case link
+        case doc
     }
     
     init(from decoder: Decoder) throws {
@@ -269,8 +321,9 @@ extension Attachment: Decodable {
         case .link:
             let items = try container.decode(AttachmentLink.self, forKey: .link)
             self = .link(items)
-        default:
-            print("Unknown type \(type)")
+        case .doc:
+            let items = try container.decode(AttachmentDoc.self, forKey: .doc)
+            self = .doc(items)
         }
     }
 }
