@@ -183,6 +183,61 @@
             </objects>
             <point key="canvasLocation" x="3642.0289855072465" y="750.66964285714278"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="yQZ-hs-YFM">
+            <objects>
+                <tableViewController id="MWG-wN-CVB" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Nn-Hp-5UN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VUr-M9-ziE" customClass="MainNewsItemCell" customModule="SocialApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VUr-M9-ziE" id="h0O-dy-Jqm">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ISY-wg-bwk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vt-Pc-geN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8b-j3-HSW">
+                                                    <rect key="frame" x="0.0" y="20.5" width="414" height="129.5"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="ISY-wg-bwk" secondAttribute="trailing" id="7E2-YH-wc3"/>
+                                        <constraint firstItem="ISY-wg-bwk" firstAttribute="leading" secondItem="h0O-dy-Jqm" secondAttribute="leading" id="ome-Qs-tTT"/>
+                                        <constraint firstAttribute="bottom" secondItem="ISY-wg-bwk" secondAttribute="bottom" id="pEX-2A-Gpo"/>
+                                        <constraint firstItem="ISY-wg-bwk" firstAttribute="top" secondItem="h0O-dy-Jqm" secondAttribute="top" id="sfF-i0-bf9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="8Vt-Pc-geN" id="VOI-eg-CNx"/>
+                                    <outlet property="midlle" destination="R8b-j3-HSW" id="dgk-nK-BJr"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MWG-wN-CVB" id="sJU-NB-JmX"/>
+                            <outlet property="delegate" destination="MWG-wN-CVB" id="uPk-am-D9U"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqR-Ws-72u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3913" y="1433"/>
+        </scene>
         <!--News Item Table View Controller-->
         <scene sceneID="4Yx-b6-Jfu">
             <objects>
