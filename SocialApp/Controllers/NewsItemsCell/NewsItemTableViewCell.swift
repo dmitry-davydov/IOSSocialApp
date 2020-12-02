@@ -9,9 +9,12 @@ import UIKit
 
 class NewsItemTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var newsItemImage: UIImageView!
+    
     @IBOutlet weak var viewedCount: UILabel!
     @IBOutlet weak var likeUiButton: LikeUIButton!
+    @IBOutlet weak var middleView: UIView!
+    
+    var attachmentRendererDelegate: AttachmentViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,9 +31,18 @@ class NewsItemTableViewCell: UITableViewCell {
     func prepareCell(_ newsItem: GroupItemDto) {
         title.text = newsItem.text
         
-        if let attachments = newsItem.attachments, attachments.count > 0 {
+        if let attachments = newsItem.attachments {
             for attachment in attachments {
-                var t = 1
+                switch attachment {
+                case .photo(let attachmentPhoto):
+                    
+                    attachmentRendererDelegate = NewsItemPhoto(view: self.middleView, attachment: attachmentPhoto)
+                    attachmentRendererDelegate?.render()
+                    
+                    debugPrint(attachmentPhoto)
+                default:
+                    print("Not impltemented \(attachment)")
+                }
             }
         }
         
@@ -39,6 +51,11 @@ class NewsItemTableViewCell: UITableViewCell {
         if let isUserLiked = newsItem.likes.userLikes {
             likeUiButton.isLiked = isUserLiked == 1 ? true : false
         }
+    }
+    
+    func clear() {
+        attachmentRendererDelegate?.clear()
+        attachmentRendererDelegate = nil
     }
 }
 
