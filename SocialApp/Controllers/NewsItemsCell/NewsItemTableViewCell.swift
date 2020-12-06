@@ -30,13 +30,29 @@ class NewsItemTableViewCell: UITableViewCell {
     
     func prepareCell(_ newsItem: GroupItemDto) {
         title.text = newsItem.text
+        viewedCount.text = String(newsItem.views.count)
+        likeUiButton.counterValue = newsItem.likes.count
+        if let isUserLiked = newsItem.likes.userLikes {
+            likeUiButton.isLiked = isUserLiked == 1 ? true : false
+        }
+        
         
         if let attachments = newsItem.attachments {
+            
+            
+            
+            
             for attachment in attachments {
                 switch attachment {
                 case .photo(let attachmentPhoto):
                     
-                    attachmentRendererDelegate = NewsItemPhoto(view: self.middleView, attachment: attachmentPhoto)
+                    if attachments.count == 1 {
+                        attachmentRendererDelegate = NewsItemAttachmentPhoto(view: self.middleView, attachment: attachmentPhoto)
+                    } else {
+                        attachmentRendererDelegate = NewsItemAttachmentPhotos(view: self.middleView, attachment: attachmentPhoto)
+                    }
+                    
+                    
                     attachmentRendererDelegate?.render()
                     
                     debugPrint(attachmentPhoto)
@@ -44,12 +60,6 @@ class NewsItemTableViewCell: UITableViewCell {
                     print("Not impltemented \(attachment)")
                 }
             }
-        }
-        
-        viewedCount.text = String(newsItem.views.count)
-        likeUiButton.counterValue = newsItem.likes.count
-        if let isUserLiked = newsItem.likes.userLikes {
-            likeUiButton.isLiked = isUserLiked == 1 ? true : false
         }
     }
     
