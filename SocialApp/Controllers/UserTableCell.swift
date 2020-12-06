@@ -9,7 +9,7 @@ import UIKit
 
 class UserTableCell: UITableViewCell {
 
-    var user: UserDto?
+    var user: FriendsRealmModel?
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var avatarView: AvatarView!

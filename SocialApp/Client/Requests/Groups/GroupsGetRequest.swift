@@ -70,4 +70,8 @@ struct GroupsGetRequest: RequestProtocol {
         
         return params
     }
+    
+    func getMethod() -> VKMethod {
+        return "groups.get"
+    }
 }
