@@ -9,7 +9,7 @@ import UIKit
 
 class UserTableCell: UITableViewCell {
 
-    var user: User?
+    var user: UserDto?
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var avatarView: AvatarView!

@@ -12,6 +12,8 @@ enum GroupType: String {
     case group, page, event
 }
 
+
+
 class Groups: VKClient {
     
     private enum Methods: VKMethod {
@@ -39,6 +41,12 @@ class Groups: VKClient {
         AF.request(requestUrl.url!).responseJSON {response in
             print(response.value)
         }
+    }
+    
+    func get(request parameters: GroupsGetRequest, completion: @escaping (VKResponse<GroupsGetResponse?, Error?>) -> Void) {
+        let requestUrl = buildUrl(for: Methods.get.rawValue, params: parameters.asParameters())
+        
+        performRequest(url: requestUrl.url!, decode: GroupsGetResponse.self, completion: completion)
     }
 }
 

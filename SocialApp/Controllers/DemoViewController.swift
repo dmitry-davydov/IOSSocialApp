@@ -14,19 +14,29 @@ class DemoViewController: UIViewController {
     }
     
     @IBAction func getFriendsAction(_ button: UIButton) {
-        let usersEndpoint = Users()
-        usersEndpoint.getFollowers()
+//        let usersEndpoint = Users()
+//        usersEndpoint.getFollowers()
     }
     @IBAction func getUserPhotosAction(_ button: UIButton) {
-        let photosEndpoint = Photos()
-        photosEndpoint.getWallPhotos()
+//        let photosEndpoint = Photos()
+//        photosEndpoint.getWallPhotos()
     }
     @IBAction func getGroupsAction(_ button: UIButton) {
-        let groupsEndpoint = Groups()
-        groupsEndpoint.currentUserGroups()
+//        let groupsEndpoint = Groups()
+//
+//        groupsEndpoint.get(request: GroupsGetRequest()) { (response) in
+//
+//            if let error = response.error {
+//                print(error)
+//                return
+//            }
+//
+//            print(response.response)
+//
+//        }
     }
     @IBAction func getGroupsSearchAction(_ button: UIButton) {
-        let groupsEndpoint = Groups()
-        groupsEndpoint.search(by: "ios", type: .group)
+//        let groupsEndpoint = Groups()
+//        groupsEndpoint.search(by: "ios", type: .group)
     }
 }

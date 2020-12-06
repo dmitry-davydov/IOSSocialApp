@@ -193,36 +193,27 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsItemCell" id="Zbe-VS-xKk" customClass="NewsItemTableViewCell" customModule="SocialApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="500.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zbe-VS-xKk" id="Sxy-Aq-Sbc">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="500.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WBV-wR-kan">
-                                            <rect key="frame" x="5" y="20" width="404" height="460.5"/>
+                                            <rect key="frame" x="5" y="20" width="404" height="120"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rl9-Sq-ZUg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="18.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="18"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryt-zM-oDv">
-                                                    <rect key="frame" x="0.0" y="18.5" width="404" height="5"/>
+                                                    <rect key="frame" x="0.0" y="18" width="404" height="52"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="5" id="sXo-oS-zFI"/>
-                                                    </constraints>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_image" translatesAutoresizingMaskIntoConstraints="NO" id="6wm-HG-fRI">
-                                                    <rect key="frame" x="0.0" y="23.5" width="404" height="387"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="6wm-HG-fRI" secondAttribute="height" multiplier="404:387" id="4Jc-hI-nhK"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-xy-kdM">
-                                                    <rect key="frame" x="0.0" y="410.5" width="404" height="50"/>
+                                                    <rect key="frame" x="0.0" y="70" width="404" height="50"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7zm-i3-X4O">
                                                             <rect key="frame" x="0.0" y="0.0" width="202" height="50"/>
@@ -251,9 +242,10 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6wm-HG-fRI" firstAttribute="leading" secondItem="WBV-wR-kan" secondAttribute="leading" id="MFt-3h-JHv"/>
-                                                <constraint firstAttribute="trailing" secondItem="6wm-HG-fRI" secondAttribute="trailing" id="aMT-gI-XpR"/>
-                                                <constraint firstItem="6wm-HG-fRI" firstAttribute="top" secondItem="rl9-Sq-ZUg" secondAttribute="bottom" constant="5" id="ipo-fp-iaP"/>
+                                                <constraint firstItem="ryt-zM-oDv" firstAttribute="top" secondItem="rl9-Sq-ZUg" secondAttribute="bottom" id="8Zw-L1-G00"/>
+                                                <constraint firstItem="aSL-xy-kdM" firstAttribute="top" secondItem="ryt-zM-oDv" secondAttribute="bottom" id="CTP-uL-D4N"/>
+                                                <constraint firstItem="ryt-zM-oDv" firstAttribute="leading" secondItem="WBV-wR-kan" secondAttribute="leading" id="dW8-75-kw8"/>
+                                                <constraint firstAttribute="trailing" secondItem="ryt-zM-oDv" secondAttribute="trailing" id="gdo-oy-F4j"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
@@ -266,7 +258,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="likeUiButton" destination="FwT-H8-pBe" id="1n2-d1-UAs"/>
-                                    <outlet property="newsItemImage" destination="6wm-HG-fRI" id="OKa-08-Oic"/>
+                                    <outlet property="middleView" destination="ryt-zM-oDv" id="soc-U3-5Ka"/>
                                     <outlet property="title" destination="rl9-Sq-ZUg" id="fqi-pU-jOd"/>
                                     <outlet property="viewedCount" destination="t27-Ln-DlU" id="Vkh-W7-IAl"/>
                                 </connections>

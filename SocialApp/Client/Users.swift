@@ -14,13 +14,10 @@ class Users: VKClient {
         case followers = "users.getFollowers"
     }
     
-    func getFollowers() {
-        let requestUrl = buildUrl(for: Method.followers.rawValue, params: [
-            "fields": "photo_100,online,last_seen,screen_name"
-        ])
+    func getFollowers(request paramters: UsersFollowersRequest, completion: @escaping (VKResponse<UsersFollowersResponse?, Error?>) -> Void) {
+        let requestUrl = buildUrl(for: Method.followers.rawValue, params: paramters.asParameters())
         
-        AF.request(requestUrl.url!).responseJSON { response in
-            print(response.value)
-        }
+        performRequest(url: requestUrl.url!, decode: UsersFollowersResponse.self, completion: completion)
+        
     }
 }
