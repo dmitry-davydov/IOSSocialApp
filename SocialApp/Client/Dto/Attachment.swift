@@ -206,10 +206,11 @@ struct AttachmentAudio: Decodable {
 struct AttachmentLink: Decodable {
     var url: String
     var title: String
-    var caption: String
+    var caption: String?
     var description: String
-    var photo: AttachmentPhoto
+    var photo: AttachmentPhoto?
     var isFavorite: Bool
+    var target: String?
     
     enum CodingKeys: String, CodingKey {
         case url
@@ -218,6 +219,7 @@ struct AttachmentLink: Decodable {
         case description
         case photo
         case isFavorite = "is_favorite"
+        case target
     }
 }
 
