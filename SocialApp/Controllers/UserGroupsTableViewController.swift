@@ -6,34 +6,22 @@
 //
 
 import UIKit
+import RealmSwift
 
 class UserGroupsTableViewController: UITableViewController {
     
-    var userGroupsResponse: GroupsGetResponse?
+    var userGroups: Results<GroupsRealmModel>?
     
     var userGroupsCount: Int {
-        return userGroupsResponse?.count ?? 0
+        return userGroups?.count ?? 0
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delaysContentTouches = false
         
-        let groupsEndpoint = Groups()
+        userGroups = GroupsDataProvider.shared.getData()
         
-        groupsEndpoint.get(request: GroupsGetRequest()) { (response) in
-            
-            if let error = response.error {
-                print(error)
-                return
-            }
-            
-            if let groupsResponse = response.response {
-                self.userGroupsResponse = groupsResponse
-                self.tableView.reloadData()
-            }
-            
-        }
     }
 
 
@@ -47,7 +35,7 @@ class UserGroupsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let item = userGroupsResponse?.items[indexPath.row] else {
+        guard let item = userGroups?[indexPath.row] else {
             fatalError("Out of user groups")
         }
         
@@ -56,7 +44,7 @@ class UserGroupsTableViewController: UITableViewController {
         }
         
         cell.name.text = item.name
-        cell.avatar.loadFrom(url: URL(string: item.photo100)!)
+        cell.avatar.loadFrom(url: URL(string: item.avatar)!)
         
         return cell
     }
@@ -82,11 +70,11 @@ class UserGroupsTableViewController: UITableViewController {
         if segue.identifier == "GroupSegue" {
             guard let vc = segue.destination as? NewsItemTableViewController else { return }
 
-            guard let userGroup = self.userGroupsResponse?.items[self.tableView.indexPathForSelectedRow!.row] else {
+            guard let userGroup = self.userGroups?[self.tableView.indexPathForSelectedRow!.row] else {
                 fatalError("Could not find user group")
             }
 
-            vc.ownerId = userGroup.id
+            vc.ownerId = userGroup.groupId
             vc.title = userGroup.name
         }
     }

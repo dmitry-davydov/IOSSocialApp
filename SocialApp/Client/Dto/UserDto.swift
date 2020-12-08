@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import RealmSwift
 
 typealias UserID = Int
 
-struct UserCareerDto: Codable {
+class UserCareerDto: Codable {
     // идентификатор сообщества (если доступно, иначе company);
     var groupId: Int
     
@@ -46,14 +47,14 @@ struct UserCareerDto: Codable {
     }
 }
 
-struct City: Codable {
+class City: Codable {
     // идентификатор города, который можно использовать для получения его названия с помощью метода database.getCitiesById;
     var id: Int
     // название города.
     var title: String
 }
 
-struct Contacts: Codable {
+class Contacts: Codable {
     // номер мобильного телефона пользователя (только для Standalone-приложений);
     var mobilePhone: String
     // дополнительный номер телефона пользователя.
@@ -66,7 +67,7 @@ struct Contacts: Codable {
 }
 
 // Объект, содержащий следующие поля:
-struct Counters: Codable {
+class Counters: Codable {
     // количество фотоальбомов;
     var albums: Int?
     // количество видеозаписей;
@@ -108,7 +109,7 @@ struct Counters: Codable {
     }
 }
 
-struct Country: Codable {
+class Country: Codable {
     // идентификатор страны, который можно использовать для получения ее названия с помощью метода database.getCountriesById;
     var id: Int
     // название страны.
@@ -116,7 +117,7 @@ struct Country: Codable {
 
 }
 
-struct Crop: Codable {
+class Crop: Codable {
     // координата X левого верхнего угла в процентах;
     var x: Double
     // координата Y левого верхнего угла в процентах;
@@ -127,7 +128,7 @@ struct Crop: Codable {
     var y2: Double
 }
 
-struct CropPhoto: Codable {
+class CropPhoto: Codable {
     // объект photo фотографии пользователя, из которой вырезается главное фото профиля.
     var photo: PhotoDto
     // вырезанная фотография пользователя. Содержит следующие поля:
@@ -136,7 +137,7 @@ struct CropPhoto: Codable {
     var rect: Crop
 }
 
-struct Education: Codable {
+class Education: Codable {
     // идентификатор университета;
     var university: Int
     // название университета;
@@ -157,7 +158,7 @@ struct Education: Codable {
     }
 }
 
-struct LastSeen: Codable {
+class LastSeen: Codable {
     // время последнего посещения в формате Unixtime.
     var time: Int
     // тип платформы. Возможные значения:
@@ -171,7 +172,7 @@ struct LastSeen: Codable {
     var platform: Int
 }
 
-struct Military: Codable {
+class Military: Codable {
     // номер части;
     var unit: String
     // идентификатор части в базе данных;
@@ -192,7 +193,7 @@ struct Military: Codable {
     }
 }
 
-struct Occupation: Codable {
+class Occupation: Codable {
     // Возможные значения:
     //   work — работа;
     //   school — среднее образование;
@@ -204,7 +205,7 @@ struct Occupation: Codable {
     var name: String
 }
 
-struct Personal: Codable {
+class Personal: Codable {
     // политические предпочтения. Возможные значения:
     //    1 — коммунистические;
     //    2 — социалистические;
@@ -267,7 +268,7 @@ struct Personal: Codable {
     }
 }
 
-struct Relative: Codable {
+class Relative: Codable {
     // идентификатор пользователя;
     var id: Int?
     // имя родственника (если родственник не является пользователем ВКонтакте, то предыдущее значение id возвращено не будет);
@@ -281,7 +282,7 @@ struct Relative: Codable {
     var type: String
 }
 
-struct School: Codable {
+class School: Codable {
     // идентификатор школы;
     var id: Int
     // идентификатор страны, в которой расположена школа;
@@ -332,7 +333,7 @@ struct School: Codable {
     }
 }
 
-struct University: Codable {
+class University: Codable {
     // идентификатор университета;
     var id: Int
     // идентификатор страны, в которой расположен университет;
@@ -371,15 +372,15 @@ struct University: Codable {
     }
 }
 
-struct UserDto: Codable {
+class UserDto: Object, Codable {
     // идентификатор пользователя
-    var id: UserID
+    @objc dynamic var id: UserID
     
     // имя
-    var firstName: String
+    @objc dynamic var firstName: String
     
     // фамилия
-    var lastName: String
+    @objc dynamic var lastName: String
     
     // поле возвращается, если страница пользователя удалена или заблокирована,
     // содержит значение deleted или banned.
@@ -548,7 +549,7 @@ struct UserDto: Codable {
     var lastSeen: LastSeen?
 
     // разделенные запятой идентификаторы списков друзей, в которых состоит пользователь. Поле доступно только для метода friends.get.
-    var lists: String?
+    var lists: [Int]?
 
     // девичья фамилия.
     var maidenName: String?

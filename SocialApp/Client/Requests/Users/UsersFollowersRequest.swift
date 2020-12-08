@@ -78,4 +78,8 @@ struct UsersFollowersRequest: RequestProtocol {
         
         return parameters
     }
+    
+    func getMethod() -> VKMethod {
+        return "users.followers"
+    }
 }

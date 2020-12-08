@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct BanInfo: Codable {
   // срок окончания блокировки в формате unixtime;
@@ -78,21 +79,21 @@ struct GroupLink: Codable {
     }
 }
 
-class GroupDto: Codable {
+class GroupDto: Object, Codable {
     // идентификатор сообщества.
-    var id: Int
+    @objc dynamic  var id: Int
     
     // название сообщества
-    var name: String
+    @objc dynamic  var name: String
     
     // короткий адрес, например, apiclub
-    var screenName: String
+    @objc dynamic  var screenName: String
     
     // является ли сообщество закрытым. Возможные значения:
     // 0 — открытое;
     // 1 — закрытое;
     // 2 — частное
-    var isClosed: Int
+    @objc dynamic var isClosed: Int
     
     // возвращается в случае, если сообщество удалено или заблокировано. Возможные значения:
     // - deleted — сообщество удалено;
@@ -202,7 +203,7 @@ class GroupDto: Codable {
     var cropPhoto: CropPhoto?
 
     // текст описания сообщества.
-    var description: String?
+    var groupDescription: String?
 
     // идентификатор закрепленной записи. Получить дополнительные данные о записи можно методом wall.getById, передав в поле posts {group_id}_{post_id}.
     var fixedPost: Int?
@@ -301,7 +302,7 @@ class GroupDto: Codable {
         case country
         case cover
         case cropPhoto = "crop_photo"
-        case description
+        case groupDescription = "description"
         case fixedPost = "fixed_post"
         case hasPhoto = "has_photo"
         case isFavorite = "is_favorite"
