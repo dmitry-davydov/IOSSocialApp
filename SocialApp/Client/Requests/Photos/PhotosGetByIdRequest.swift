@@ -22,4 +22,8 @@ struct PhotosGetByIdRequest: RequestProtocol {
         
         return params
     }
+    
+    func getMethod() -> VKMethod {
+        return "photos.getById"
+    }
 }

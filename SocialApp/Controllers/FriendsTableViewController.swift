@@ -11,35 +11,26 @@ class FriendsTableViewController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var indexedUsers = [[UserDto]]()
+    var userFriends = [FriendsRealmModel]()
+    var indexedUsers = [[FriendsRealmModel]]()
     var sections = [String]()
     
-    var userFollowers: UsersFollowersResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delaysContentTouches = false
         searchBar.delegate = self
         fetchUserFollowers()
-        
     }
     
     private func fetchUserFollowers() {
-        let userEndpoint = Users()
-        let requestObject = UsersFollowersRequest(userId: nil, offset: 0, count: nil, fields: [.nickname, .photo100], nameCase: .nom)
+        let friends = FriendsDataProvider.shared.getData()
+        if friends.count == 0 { return }
         
-        userEndpoint.getFollowers(request: requestObject) { response in
-            if let err = response.error {
-                debugPrint(err)
-                return
-            }
-            
-            guard let userResponse = response.response else { return }
-            
-            self.userFollowers = userResponse
-            self.indexUsers(nil)
-            self.tableView.reloadData()
-        }
+        userFriends = friends.map({$0 as FriendsRealmModel})
+        
+        indexUsers(nil)
+        tableView.reloadData()
     }
 
     private func indexUsers(_ st: String?) {
@@ -50,10 +41,7 @@ class FriendsTableViewController: UITableViewController {
             searchText = nil
         }
 
-        guard let users = userFollowers?.items else { return }
-        
-
-        for user in users {
+        for user in userFriends {
             
             if let st = searchText {
                 if !user.fullName.contains(st) { continue }
@@ -95,7 +83,7 @@ class FriendsTableViewController: UITableViewController {
         cell.user = user
         cell.name.text = user.fullName
         
-        cell.avatarView.loadFrom(url: URL(string: user.photo100!)!)
+        cell.avatarView.loadFrom(url: URL(string: user.avatar)!)
         
         
         return cell
@@ -103,7 +91,6 @@ class FriendsTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let cell = sender as! UserTableCell
         let destintaion = segue.destination as! UserCollectionViewController
         
         let selectedIndexPath = self.tableView.indexPathForSelectedRow!
@@ -116,9 +103,8 @@ class FriendsTableViewController: UITableViewController {
 extension FriendsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         sections = [String]()
-        indexedUsers = [[UserDto]]()
+        indexedUsers = [[FriendsRealmModel]]()
         indexUsers(searchText)
         self.tableView.reloadData()
-        
     }
 }

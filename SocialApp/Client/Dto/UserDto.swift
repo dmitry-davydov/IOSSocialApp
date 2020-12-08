@@ -549,7 +549,7 @@ class UserDto: Object, Codable {
     var lastSeen: LastSeen?
 
     // разделенные запятой идентификаторы списков друзей, в которых состоит пользователь. Поле доступно только для метода friends.get.
-    var lists: String?
+    var lists: [Int]?
 
     // девичья фамилия.
     var maidenName: String?

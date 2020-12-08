@@ -8,12 +8,7 @@
 import Foundation
 import UIKit
 
-protocol AttachmentViewDelegate: class {
-    func render()
-    func clear()
-}
-
-class NewsItemPhoto: AttachmentViewDelegate {
+class NewsItemAttachmentPhoto: AttachmentViewDelegate {
     weak var view: UIView!
     var attachment: AttachmentPhoto
     var subview: UIView?
@@ -32,16 +27,17 @@ class NewsItemPhoto: AttachmentViewDelegate {
             
             subview = UIImageView(image: img)
             
-            subview?.frame = CGRect(x: 0, y: 0, width: attachment.sizes[0].width, height: attachment.sizes[0].height)
+            let aspectRatio = CGFloat(attachment.sizes[0].height) / CGFloat(attachment.sizes[0].width)
+            let newHeight = aspectRatio * view.frame.width - 15
             
+            subview?.frame = CGRect(x: 0, y: 0, width: view.frame.width - 15, height: newHeight)
+            subview?.contentMode = .scaleToFill
             
-            view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width, height: CGFloat(attachment.sizes[0].height))
+            view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width - 15, height: newHeight)
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.heightAnchor.constraint(equalToConstant: CGFloat(attachment.sizes[0].height)).isActive = true
+            view.heightAnchor.constraint(equalToConstant: CGFloat(newHeight)).isActive = true
             
             view.addSubview(subview!)
-            
-            
         }
     }
     

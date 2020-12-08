@@ -9,7 +9,7 @@ import UIKit
 
 class UserCollectionViewController: UICollectionViewController {
 
-    var user: UserDto!
+    var user: FriendsRealmModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,12 +23,7 @@ class UserCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userImageCell", for: indexPath) as! UserCollectionViewCell
-        
-        if let userPhoto = user.photo100 {
-            cell.avatarView.loadFrom(url: URL(string: userPhoto)!)
-        }
-        
-        
+        cell.avatarView.loadFrom(url: URL(string: user.avatar)!)
         
         return cell
     }

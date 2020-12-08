@@ -37,4 +37,8 @@ struct PhotosGetAlbumsRequest: RequestProtocol {
         
         return params
     }
+    
+    func getMethod() -> VKMethod {
+        return "photos.getAlbums"
+    }
 }

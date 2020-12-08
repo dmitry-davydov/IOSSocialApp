@@ -47,4 +47,8 @@ struct WallGetRequest: RequestProtocol {
         
         return params
     }
+    
+    func getMethod() -> VKMethod {
+        return "wall.get"
+    }
 }

@@ -12,6 +12,7 @@ typealias VKMethod = String
 
 protocol RequestProtocol {
     func asParameters() -> Parameters
+    func getMethod() -> VKMethod
 }
 
 struct VKResponse<T, E> {

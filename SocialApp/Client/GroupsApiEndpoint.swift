@@ -14,7 +14,7 @@ enum GroupType: String {
 
 
 
-class Groups: VKClient {
+class GroupsApiEndpoint: VKClient {
     
     private enum Methods: VKMethod {
         case get = "groups.get"
