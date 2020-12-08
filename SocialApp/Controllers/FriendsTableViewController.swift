@@ -27,68 +27,45 @@ class FriendsTableViewController: UITableViewController {
     }
     
     private func fetchUserFollowers() {
-        let friends = FriendsDataProvider.shared.getData()
+        userFriends = FriendsDataProvider.shared.getData()
         
-        notificationToken = friends.observe(on: .main, { [weak self] (collectionChange) in
+        notificationToken = userFriends?.observe(on: .main, { [weak self] (collectionChange) in
             switch collectionChange {
             case .initial(let results):
-                self?.doIndex(results)
+                self?.indexUsers(results, searchString: nil)
                 self?.tableView.reloadData()
                 os_log(.info, "Realm - Initial notification")
             case .error(let error):
                 os_log(.info, "Realm - error notification: \(error.localizedDescription)")
             case let .update(results, _, _, _):
                 os_log(.info, "Realm - Updated notification")
-                self?.doIndex(results)
+                self?.indexUsers(results, searchString: nil)
                 self?.tableView.reloadData()
-                
-//                self?.tableView.beginUpdates()
-//
-//                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-//                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-//                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-//
-//                self?.tableView.endUpdates()
             }
         })
     }
 
-    private func doIndex(_ results: Results<FriendsRealmModel>) {
+    private func indexUsers(_ results: Results<FriendsRealmModel>?, searchString: String?) {
+        
+        let userFriendsResults = results != nil ? results : userFriends
+        
+        guard let results = userFriendsResults else {
+            return
+        }
         
         indexedUsers = [[FriendsRealmModel]]()
         
-        for user in results {
-            
-            let firstLetter = String(user.fullName.first!)
-
-            let indexOfLetter = sections.firstIndex(of: firstLetter)
-
-            if indexOfLetter == nil {
-                sections.append(firstLetter)
-                indexedUsers.append([user])
-                continue
-            }
-
-            indexedUsers[indexOfLetter!].append(user)
+        var searchText: String?
+        if let searchString = searchString, searchString.count > 0 {
+            searchText = searchString
         }
-    }
-    
-    private func indexUsers(_ st: String?) {
-
-        var searchText = st
-
-        if searchText != nil && searchText?.count == 0 {
-            searchText = nil
-        }
-
-        guard let userFriends = userFriends else { return }
         
-        for user in userFriends {
+        for user in results {
             
             if let st = searchText {
                 if !user.fullName.contains(st) { continue }
             }
-
+            
             let firstLetter = String(user.fullName.first!)
 
             let indexOfLetter = sections.firstIndex(of: firstLetter)
@@ -146,7 +123,7 @@ extension FriendsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         sections = [String]()
         indexedUsers = [[FriendsRealmModel]]()
-        indexUsers(searchText)
+        indexUsers(nil, searchString: searchText)
         self.tableView.reloadData()
     }
 }
