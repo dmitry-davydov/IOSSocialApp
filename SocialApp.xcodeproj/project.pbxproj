@@ -46,8 +46,10 @@
 		0A7F1DBD2572F08500DC2455 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F1DBC2572F08500DC2455 /* Attachment.swift */; };
 		0A7F1DCA2573EA4B00DC2455 /* NewsItemAttachmentPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F1DC92573EA4B00DC2455 /* NewsItemAttachmentPhotos.swift */; };
 		0A8572E9256300050071C029 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8572E8256300050071C029 /* UserSession.swift */; };
+		0A94AD23258648BE00A0E5FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A94AD22258648BE00A0E5FF /* GoogleService-Info.plist */; };
 		0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99F40E2524FB4A00221793 /* LoginViewController.swift */; };
 		0AA3048325798CC500EF5887 /* NewsItemAttchementPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3048225798CC500EF5887 /* NewsItemAttchementPhoto.swift */; };
+		0AC8816B2586562C005881BD /* FireBaseUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */; };
 		0AD97CBB252BADB30080779C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBA252BADB30080779C /* Extensions.swift */; };
 		0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */; };
 		0AD97CC3252BC30B0080779C /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CC2252BC30B0080779C /* UserCollectionViewController.swift */; };
@@ -118,8 +120,10 @@
 		0A7F1DBC2572F08500DC2455 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		0A7F1DC92573EA4B00DC2455 /* NewsItemAttachmentPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemAttachmentPhotos.swift; sourceTree = "<group>"; };
 		0A8572E8256300050071C029 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		0A94AD22258648BE00A0E5FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A99F40E2524FB4A00221793 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AA3048225798CC500EF5887 /* NewsItemAttchementPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemAttchementPhoto.swift; sourceTree = "<group>"; };
+		0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseUserGroups.swift; sourceTree = "<group>"; };
 		0AD97CBA252BADB30080779C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AD97CC2252BC30B0080779C /* UserCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 				0A0193D1252A19E1006977E3 /* Group.swift */,
 				0A7C6558253A23830000AFF3 /* NewsItem.swift */,
 				0A8572E8256300050071C029 /* UserSession.swift */,
+				0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				0A2EE168251FAF36009AECA1 /* LaunchScreen.storyboard */,
 				0A2EE16B251FAF36009AECA1 /* Info.plist */,
 				0AD97CBA252BADB30080779C /* Extensions.swift */,
+				0A94AD22258648BE00A0E5FF /* GoogleService-Info.plist */,
 			);
 			path = SocialApp;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2EE16A251FAF36009AECA1 /* LaunchScreen.storyboard in Resources */,
+				0A94AD23258648BE00A0E5FF /* GoogleService-Info.plist in Resources */,
 				0A2EE167251FAF36009AECA1 /* Assets.xcassets in Resources */,
 				0A2EE165251FAF35009AECA1 /* Main.storyboard in Resources */,
 			);
@@ -588,6 +595,7 @@
 				0A1A3F1A2527A75000235937 /* UserTableCell.swift in Sources */,
 				0A128FB325701C570005716A /* UsersFollowersResponse.swift in Sources */,
 				0A1A3F172527A35C00235937 /* UserGroupsTableViewController.swift in Sources */,
+				0AC8816B2586562C005881BD /* FireBaseUserGroups.swift in Sources */,
 				0A565087253B6F6400FF7018 /* LoadingUIButton.swift in Sources */,
 				0AF5BF9E256C2FB20040E81A /* PhotoDto.swift in Sources */,
 				0AF9E29E252E6151001C56FB /* AvatarView.swift in Sources */,

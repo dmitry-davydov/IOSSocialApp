@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import Firebase
 
 class GroupsDataProvider {
     private let LAST_UPDATED_AT_CACHE_KEY = "UserGroupsApiEndpointLastUpdatedAt"
@@ -40,11 +41,11 @@ class GroupsDataProvider {
     }
     
     private func loadFromApi() {
-        if Int(Date().timeIntervalSince1970) - lastUpdatedAt < apiCacheLifetime  {
-            // кеш валиден
-            print("fetch from realm")
-            return
-        }
+//        if Int(Date().timeIntervalSince1970) - lastUpdatedAt < apiCacheLifetime  {
+//            // кеш валиден
+//            print("fetch from realm")
+//            return
+//        }
         
         endpoint.get(request: GroupsGetRequest(), completion: {[weak self] response in
             if let error = response.error {
@@ -77,6 +78,24 @@ class GroupsDataProvider {
             } catch (let err) {
                 print(err)
             }
+            
+            // сохранить в firebase
+            let db = Firestore.firestore()
+            
+            
+            
+            var filestoreData = [String: Any]()
+            for dto in items {
+                filestoreData[dto.id.asString()] = dto.toFilestore()
+            }
+            
+            
+            db.collection("users").document(LoginService.shared.userId()).setData(filestoreData, merge: true) {err in
+                if let err = err {
+                    print(err.localizedDescription)
+                } else { print("data saved") }
+            }
+            
         })
     }
     
