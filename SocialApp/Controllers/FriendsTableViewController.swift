@@ -6,14 +6,17 @@
 //
 
 import UIKit
+import RealmSwift
+import os.log
 
 class FriendsTableViewController: UITableViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var userFriends = [FriendsRealmModel]()
+    var userFriends: Results<FriendsRealmModel>?
     var indexedUsers = [[FriendsRealmModel]]()
     var sections = [String]()
+    private var notificationToken: NotificationToken?
     
     
     override func viewDidLoad() {
@@ -24,29 +27,45 @@ class FriendsTableViewController: UITableViewController {
     }
     
     private func fetchUserFollowers() {
-        let friends = FriendsDataProvider.shared.getData()
-        if friends.count == 0 { return }
+        userFriends = FriendsDataProvider.shared.getData()
         
-        userFriends = friends.map({$0 as FriendsRealmModel})
-        
-        indexUsers(nil)
-        tableView.reloadData()
+        notificationToken = userFriends?.observe(on: .main, { [weak self] (collectionChange) in
+            switch collectionChange {
+            case .initial(let results):
+                self?.indexUsers(results, searchString: nil)
+                self?.tableView.reloadData()
+                os_log(.info, "Realm - Initial notification")
+            case .error(let error):
+                os_log(.info, "Realm - error notification: \(error.localizedDescription)")
+            case let .update(results, _, _, _):
+                os_log(.info, "Realm - Updated notification")
+                self?.indexUsers(results, searchString: nil)
+                self?.tableView.reloadData()
+            }
+        })
     }
 
-    private func indexUsers(_ st: String?) {
-
-        var searchText = st
-
-        if searchText != nil && searchText?.count == 0 {
-            searchText = nil
+    private func indexUsers(_ results: Results<FriendsRealmModel>?, searchString: String?) {
+        
+        let userFriendsResults = results != nil ? results : userFriends
+        
+        guard let results = userFriendsResults else {
+            return
         }
-
-        for user in userFriends {
+        
+        indexedUsers = [[FriendsRealmModel]]()
+        
+        var searchText: String?
+        if let searchString = searchString, searchString.count > 0 {
+            searchText = searchString
+        }
+        
+        for user in results {
             
             if let st = searchText {
                 if !user.fullName.contains(st) { continue }
             }
-
+            
             let firstLetter = String(user.fullName.first!)
 
             let indexOfLetter = sections.firstIndex(of: firstLetter)
@@ -104,7 +123,7 @@ extension FriendsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         sections = [String]()
         indexedUsers = [[FriendsRealmModel]]()
-        indexUsers(searchText)
+        indexUsers(nil, searchString: searchText)
         self.tableView.reloadData()
     }
 }

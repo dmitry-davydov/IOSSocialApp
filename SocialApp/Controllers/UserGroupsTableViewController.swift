@@ -7,10 +7,12 @@
 
 import UIKit
 import RealmSwift
+import os.log
 
 class UserGroupsTableViewController: UITableViewController {
     
     var userGroups: Results<GroupsRealmModel>?
+    var realmNotificationToken: NotificationToken?
     
     var userGroupsCount: Int {
         return userGroups?.count ?? 0
@@ -22,6 +24,24 @@ class UserGroupsTableViewController: UITableViewController {
         
         userGroups = GroupsDataProvider.shared.getData()
         
+        realmNotificationToken = userGroups?._observe(.main, { [weak self] realmCollectionChange in
+            switch realmCollectionChange {
+            case .error(let err):
+                os_log(.error, "Realm notification err: \(err.localizedDescription)")
+            
+            case let .update(_, deletions, insertions, modifications):
+                os_log(.info, "Realm notification update: insertions: \(insertions) modifications: \(modifications) deletions: \(deletions)")
+                
+                self?.tableView.beginUpdates()
+                self?.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self?.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                self?.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self?.tableView.endUpdates()
+                
+            case .initial(_):
+                os_log(.error, "Realm notification initial")
+            }
+        })
     }
 
 

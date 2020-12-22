@@ -37,30 +37,25 @@ class NewsItemTableViewCell: UITableViewCell {
         }
         
         
+        var photoAttachments: [AttachmentPhoto] = []
+        
         if let attachments = newsItem.attachments {
-            
-            
-            
-            
+            // сгруппировать все аттачи по типам
             for attachment in attachments {
                 switch attachment {
                 case .photo(let attachmentPhoto):
-                    
-                    if attachments.count == 1 {
-                        attachmentRendererDelegate = NewsItemAttachmentPhoto(view: self.middleView, attachment: attachmentPhoto)
-                    } else {
-                        attachmentRendererDelegate = NewsItemAttachmentPhotos(view: self.middleView, attachment: attachmentPhoto)
-                    }
-                    
-                    
-                    attachmentRendererDelegate?.render()
-                    
-                    debugPrint(attachmentPhoto)
+                    photoAttachments.append(attachmentPhoto)
                 default:
-                    print("Not impltemented \(attachment)")
+                    print("Not impltemented \(attachment.self)")
                 }
             }
         }
+        
+        if photoAttachments.count > 0 {
+            attachmentRendererDelegate = NewsItemAttachmentPhotos(view: self.middleView, attachment: photoAttachments)
+        }
+        
+        attachmentRendererDelegate?.render()
     }
     
     func clear() {
