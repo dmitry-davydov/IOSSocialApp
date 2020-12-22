@@ -65,8 +65,11 @@ extension LoginViewController: WKNavigationDelegate {
         
         decisionHandler(.cancel)
         
-        if let token = params["access_token"] {
-            LoginService.shared.setAuthToken(token)
+        debugPrint("AUTH params")
+        debugPrint(params)
+        
+        if let token = params["access_token"], let userId = params["user_id"] {
+            LoginService.shared.setAuthToken(userId: userId, token: token)
             navigateToEntryPoint()
         }
     }

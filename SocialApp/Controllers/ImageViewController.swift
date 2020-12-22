@@ -43,7 +43,7 @@ class ImageViewController: UIViewController {
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panGesture))
         self.view.addGestureRecognizer(panGestureRecognizer)
         
-        addImages()
+//        addImages()
     }
     
     private func isSwipingLeft() -> Bool {
@@ -144,20 +144,9 @@ class ImageViewController: UIViewController {
         })
     }
     
-    func addImages() {
-        
-        let url = URL.init(string: "https://picsum.photos/600")!
-        
-        for _ in 0..<5 {
-            
-            DispatchQueue.global(qos: .userInteractive).async { [unowned self] in
-                
-                let imageData = try? Data(contentsOf: url)
-                
-                DispatchQueue.main.async { [unowned self] in
-                    self.createImageView(UIImage(data: imageData!)!)
-                }
-            }
+    func addImages(images: [UIImage]) {
+        for img in images {
+            self.createImageView(img)
         }
     }
     

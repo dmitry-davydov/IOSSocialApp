@@ -9,5 +9,5 @@ import Foundation
 
 class UserSession {
     var token: String = ""
-    var userId: Int = 0
+    var userId: String = ""
 }

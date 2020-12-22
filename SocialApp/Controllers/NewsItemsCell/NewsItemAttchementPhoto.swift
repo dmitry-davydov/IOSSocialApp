@@ -21,23 +21,30 @@ class NewsItemAttachmentPhoto: AttachmentViewDelegate {
     
     
     func render(){
-        if let url = URL(string: attachment.sizes[0].url),
+        
+        guard let thumb = attachment.sizes.find(by: .x) else { return }
+        
+        if let url = URL(string: thumb.url),
            let data = try? Data(contentsOf: url),
            let img = UIImage(data: data) {
             
             subview = UIImageView(image: img)
+
+            subview?.translatesAutoresizingMaskIntoConstraints = false
+                        
+            let aspectRatio = CGFloat(thumb.height) / CGFloat(thumb.width)
+            let newHeight = aspectRatio * view.frame.width
+
+            subview?.contentMode = .scaleAspectFill
             
-            let aspectRatio = CGFloat(attachment.sizes[0].height) / CGFloat(attachment.sizes[0].width)
-            let newHeight = aspectRatio * view.frame.width - 15
-            
-            subview?.frame = CGRect(x: 0, y: 0, width: view.frame.width - 15, height: newHeight)
-            subview?.contentMode = .scaleToFill
-            
-            view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: view.frame.width - 15, height: newHeight)
             view.translatesAutoresizingMaskIntoConstraints = false
             view.heightAnchor.constraint(equalToConstant: CGFloat(newHeight)).isActive = true
             
             view.addSubview(subview!)
+            subview?.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            subview?.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            subview?.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            subview?.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
     }
     

@@ -315,4 +315,12 @@ class GroupDto: Object, Codable {
         case membersCount = "members_count"
         case wall
     }
+    
+    func toFilestore() -> [String: Any] {
+        return [
+            "id": id.asString(),
+            "name": name,
+            "imageUrl": photo200,
+        ]
+    }
 }

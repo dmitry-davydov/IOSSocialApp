@@ -14,6 +14,59 @@ struct AttachmentPhotoSize: Decodable {
     var height: Int
 }
 
+enum PhotoSizeType: String {
+    
+    // s — пропорциональная копия изображения с максимальной стороной 75px;
+    case s
+    // m — пропорциональная копия изображения с максимальной стороной 130px;
+    case m
+    // x — пропорциональная копия изображения с максимальной стороной 604px;
+    case x
+    // o — если соотношение "ширина/высота" исходного изображения меньше или равно 3:2, то пропорциональная копия с максимальной шириной 130px. Если соотношение "ширина/высота" больше 3:2, то копия обрезанного слева изображения с максимальной шириной 130px и соотношением сторон 3:2.
+    case o
+    // p — если соотношение "ширина/высота" исходного изображения меньше или равно 3:2, то пропорциональная копия с максимальной шириной 200px. Если соотношение "ширина/высота" больше 3:2, то копия обрезанного слева и справа изображения с максимальной шириной 200px и соотношением сторон 3:2.
+    case p
+    // q — если соотношение "ширина/высота" исходного изображения меньше или равно 3:2, то пропорциональная копия с максимальной шириной 320px. Если соотношение "ширина/высота" больше 3:2, то копия обрезанного слева и справа изображения с максимальной шириной 320px и соотношением сторон 3:2.
+    case q
+    // r — если соотношение "ширина/высота" исходного изображения меньше или равно 3:2, то пропорциональная копия с максимальной шириной 510px. Если соотношение "ширина/высота" больше 3:2, то копия обрезанного слева и справа изображения с максимальной шириной 510px и соотношением сторон 3:2
+    case r
+    // y — пропорциональная копия изображения с максимальной стороной 807px;
+    case y
+    // z — пропорциональная копия изображения с максимальным размером 1080x1024;
+    case z
+    // w — пропорциональная копия изображения с максимальным размером 2560x2048px.
+    case w
+
+}
+
+extension Array where Element == AttachmentPhotoSize {
+    
+    func find(by type: PhotoSizeType) -> AttachmentPhotoSize? {
+        for size in self {
+            if size.type != type.rawValue { continue }
+            return size
+        }
+        
+        return nil
+    }
+    
+    func sortByWidth() -> [AttachmentPhotoSize] {
+        return self.sorted { (a, b) -> Bool in
+            return a.width > b.width
+        }
+    }
+    
+    func findBy(width: Int) -> AttachmentPhotoSize? {
+        for size in self {
+            if size.width < width { continue }
+            
+            return size
+        }
+        
+        return nil
+    }
+}
+
 struct AttachmentPhoto: Decodable {
     var id: Int
     var albumId: Int
@@ -102,7 +155,7 @@ struct AttachmentVideo: Decodable {
     var description: String
     var duration: Int
     var image: [AttachmentVideoImage]
-    var firstFrame: [AttachmentVideoFrame]
+    var firstFrame: [AttachmentVideoFrame]?
     var date: Int
     var addingDate: Int?
     var views: Int
@@ -122,8 +175,8 @@ struct AttachmentVideo: Decodable {
     var canSubscribe: Int
     var canAddToFavs: Int?
     var canAttachLink: Int?
-    var width: Int
-    var height: Int
+    var width: Int?
+    var height: Int?
     var userId: UserID?
     var converting: Int?
     var added: Int?
@@ -180,12 +233,12 @@ struct AttachmentAudio: Decodable {
     var title: String
     var duration: Int
     var url: String
-    var lyricsId: Int
-    var albumId: Int
-    var genreId: Int
+    var lyricsId: Int?
+    var albumId: Int?
+    var genreId: Int?
     var date: Int
-    var noSearch: Int
-    var isHQ: Int
+    var noSearch: Int?
+    var isHQ: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -209,7 +262,7 @@ struct AttachmentLink: Decodable {
     var caption: String?
     var description: String
     var photo: AttachmentPhoto?
-    var isFavorite: Bool
+    var isFavorite: Bool?
     var target: String?
     
     enum CodingKeys: String, CodingKey {
@@ -221,6 +274,52 @@ struct AttachmentLink: Decodable {
         case isFavorite = "is_favorite"
         case target
     }
+}
+
+
+struct AttachmentAlbum: Decodable {
+    
+    struct Thumb: Decodable {
+        var album_id: Int
+        var date: Int
+        var id: Int
+        var owner_id: UserID
+        var has_tags: Bool
+        var access_key: String
+        var sizes: [PhotoSize]
+        var text: String
+        var user_id: UserID
+    }
+    
+    var id: String
+    var thumb: Thumb
+    var owner_id: UserID
+    var title: String
+    var description: String
+    var created: Int
+    var updated: Int
+    var size: Int
+}
+
+struct AttachmentEvent: Decodable {
+    var id: Int
+    var buttonText: String
+    var isFavorite: Bool
+    var text: String
+    var address: String
+    var memberStatus: Int
+    var time: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case buttonText = "button_text"
+        case isFavorite = "is_favorite"
+        case text
+        case address
+        case memberStatus = "member_status"
+        case time
+    }
+    
 }
 
 struct AttachmentDocAttachmentDoc: Decodable {
@@ -279,6 +378,8 @@ enum Attachment {
     case audio(AttachmentAudio)
     case link(AttachmentLink)
     case doc(AttachmentDoc)
+    case event(AttachmentEvent)
+    case album(AttachmentAlbum)
     
     enum type: String, Decodable {
         case photo
@@ -287,6 +388,8 @@ enum Attachment {
         case audio
         case link
         case doc
+        case event
+        case album
     }
 }
 
@@ -300,6 +403,8 @@ extension Attachment: Decodable {
         case audio
         case link
         case doc
+        case event
+        case album
     }
     
     init(from decoder: Decoder) throws {
@@ -326,6 +431,12 @@ extension Attachment: Decodable {
         case .doc:
             let items = try container.decode(AttachmentDoc.self, forKey: .doc)
             self = .doc(items)
+        case .event:
+            let items = try container.decode(AttachmentEvent.self, forKey: .event)
+            self = .event(items)
+        case .album:
+            let items = try container.decode(AttachmentAlbum.self, forKey: .album)
+            self = .album(items)
         }
     }
 }

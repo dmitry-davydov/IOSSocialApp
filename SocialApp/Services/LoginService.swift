@@ -42,8 +42,16 @@ class LoginService {
         return urlComponents
     }
     
-    func setAuthToken(_ token: String) {
+    func setAuthToken(userId: String, token: String) {
         self.session.token = token
+        self.session.userId = userId
+        
+        // Записывать в базу пользователей, которые авторизовались в приложении (id)
+        
+    }
+    
+    func userId() -> String {
+        return session.userId
     }
     
     func isLoggedIn() -> Bool {

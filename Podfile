@@ -8,4 +8,8 @@ target 'SocialApp' do
   # Pods for SocialApp
   pod 'Alamofire', '~> 5.4'
   pod 'RealmSwift', '~> 10.1'
+  pod 'Firebase/Auth'
+  pod 'FirebaseDatabase'
+#  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 end
