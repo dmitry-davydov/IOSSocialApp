@@ -21,6 +21,7 @@ extension LikeUIButtonDelegate {
     }
 }
 
+@IBDesignable
 class LikeUIButton: UIControl {
 
     var counterValue: Int = 0;
