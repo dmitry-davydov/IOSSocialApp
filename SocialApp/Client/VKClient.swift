@@ -105,6 +105,45 @@ class VKClient {
                     handler(VKResponse(response: nil, error: err))
                 }
             }
+    }
+    
+    func performConcurrentRequest<T>(url: URL, decode to: T.Type, completion handler: @escaping (VKResponse<T?, Error?>) -> Void) where T: NotifiableDecodableGroup {
+    
+        session
+            .request(url)
+            .debugLog()
+            .responseData { (response) in
+                
+                switch response.result {
+                case .success(_):
+                    do {
+                        guard let data = response.data else { return }
+                        
+                        let group = DispatchGroup()
+                        let queue = DispatchQueue(label: "vkclient.jsondecoder", attributes: .concurrent)
+                        let groupsGetResponse = T.init(queue: queue, group: group)
+                        try? groupsGetResponse.decode(from: data)
+                        if let gr = groupsGetResponse.getNotifyGroup() {
+                            gr.notify(queue: DispatchQueue.main) {
+                                print("Got notify")
+                                
+                                handler(VKResponse(response: groupsGetResponse, error: nil))
+                            }
+                        }
+                        
+                        
+                        
+                        
+                    } catch let DecodingError.keyNotFound(key, context) {
+                        handler(VKResponse(response: nil, error: DecodingError.keyNotFound(key, context)))
+                    } catch let err as NSError {
+                        handler(VKResponse(response: nil, error: err))
+                    }
+                    
+                case .failure(let err):
+                    handler(VKResponse(response: nil, error: err))
+                }
+            }
         
     }
 }
