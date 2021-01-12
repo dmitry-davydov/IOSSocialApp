@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoSize: Codable {
+struct PhotoSize: Codable, JsonObjectInitProtocol {
     // (string) — тип копии
     // s — пропорциональная копия изображения с максимальной стороной 75px;
     // m — пропорциональная копия изображения с максимальной стороной 130px;
@@ -27,6 +27,13 @@ struct PhotoSize: Codable {
     var width: Int
     // ширина в px.
     var height: Int
+    
+    init(from anyMap: [String : Any]) {
+        self.type = anyMap["type"] as! String
+        self.url = anyMap["url"] as! String
+        self.width = anyMap["width"] as! Int
+        self.height = anyMap["height"] as! Int
+    }
 }
 
 struct PhotoDto: Codable {
