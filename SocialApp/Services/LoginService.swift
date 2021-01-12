@@ -17,6 +17,7 @@ class LoginService {
         case photos = 4
         case wall = 8192
         case groups = 262144
+        case offline = 65536
     }
     
     private let clientId = 7672440
