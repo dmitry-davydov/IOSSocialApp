@@ -131,9 +131,6 @@ class VKClient {
                             }
                         }
                         
-                        
-                        
-                        
                     } catch let DecodingError.keyNotFound(key, context) {
                         handler(VKResponse(response: nil, error: DecodingError.keyNotFound(key, context)))
                     } catch let err as NSError {
