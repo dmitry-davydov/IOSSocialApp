@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 enum GroupType: String {
     case group, page, event
@@ -43,10 +44,8 @@ class GroupsApiEndpoint: VKClient {
         }
     }
     
-    func get(request parameters: GroupsGetRequest, completion: @escaping (VKResponse<GroupsGetResponse?, Error?>) -> Void) {
-        let requestUrl = buildUrl(for: Methods.get.rawValue, params: parameters.asParameters())
-        
-        performRequest(url: requestUrl.url!, decode: GroupsGetResponse.self, completion: completion)
+    func get(request parameters: GroupsGetRequest) -> Promise<GroupsGetResponse> {
+        return promise(request: parameters, decode: GroupsGetResponse.self)
     }
 }
 

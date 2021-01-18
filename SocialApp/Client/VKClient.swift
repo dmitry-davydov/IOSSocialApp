@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 typealias VKMethod = String
 
@@ -142,5 +143,29 @@ class VKClient {
                 }
             }
         
+    }
+    
+    func promise<T>(request: RequestProtocol, decode to: T.Type) -> Promise<T> where T: Decodable {
+        return Promise { pr in
+            session
+                .request(self.buildUrl(for: request.getMethod(), params: request.asParameters()))
+                .debugLog()
+                .responseData { (response) in
+                    switch response.result {
+                    case .success(_):
+                        do {
+                            guard let data = response.data else { return }
+                            let decodedResponse = try JSONDecoder().decode(to, from: data)
+                            pr.resolve(decodedResponse, nil)
+                        } catch let DecodingError.keyNotFound(key, context) {
+                            pr.reject(DecodingError.keyNotFound(key, context))
+                        } catch let err as NSError {
+                            pr.reject(err)
+                        }
+                    case .failure(let err):
+                        pr.reject(err)
+                    }
+                }
+        }
     }
 }
