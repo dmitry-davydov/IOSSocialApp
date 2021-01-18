@@ -42,6 +42,8 @@
 		0A41CCD025AF6C1D008AD50A /* VkParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41CCCF25AF6C1D008AD50A /* VkParseOperation.swift */; };
 		0A41CCD325AF6C3E008AD50A /* VkRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41CCD225AF6C3E008AD50A /* VkRequestOperation.swift */; };
 		0A41CCD625AF6C7F008AD50A /* FriendsRealmSaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41CCD525AF6C7F008AD50A /* FriendsRealmSaveOperation.swift */; };
+		0A50D72D25B60B1200F608A3 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50D72C25B60B1200F608A3 /* CacheService.swift */; };
+		0A50D73125B61AD100F608A3 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50D73025B61AD100F608A3 /* ImageCacheService.swift */; };
 		0A565087253B6F6400FF7018 /* LoadingUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A565086253B6F6400FF7018 /* LoadingUIButton.swift */; };
 		0A670C1E257D25EC000272A6 /* FriendsGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A670C1D257D25EC000272A6 /* FriendsGetResponse.swift */; };
 		0A670C21257D4605000272A6 /* GroupsRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A670C20257D4605000272A6 /* GroupsRealmModel.swift */; };
@@ -126,6 +128,8 @@
 		0A41CCCF25AF6C1D008AD50A /* VkParseOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkParseOperation.swift; sourceTree = "<group>"; };
 		0A41CCD225AF6C3E008AD50A /* VkRequestOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkRequestOperation.swift; sourceTree = "<group>"; };
 		0A41CCD525AF6C7F008AD50A /* FriendsRealmSaveOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRealmSaveOperation.swift; sourceTree = "<group>"; };
+		0A50D72C25B60B1200F608A3 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		0A50D73025B61AD100F608A3 /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		0A565086253B6F6400FF7018 /* LoadingUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingUIButton.swift; sourceTree = "<group>"; };
 		0A670C1D257D25EC000272A6 /* FriendsGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsGetResponse.swift; sourceTree = "<group>"; };
 		0A670C20257D4605000272A6 /* GroupsRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsRealmModel.swift; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 			children = (
 				0A3B8FE72524FF2C003D4939 /* LoginService.swift */,
 				0AE83442257D1C6C00875217 /* RealmService.swift */,
+				0A50D72C25B60B1200F608A3 /* CacheService.swift */,
+				0A50D73025B61AD100F608A3 /* ImageCacheService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -668,12 +674,14 @@
 				0A3A5E5F2547496100F255BF /* SocialAppPopAnimation.swift in Sources */,
 				0A2768D1259D04FB00FB348E /* NewsFeedGetResponse.swift in Sources */,
 				0AE8BD2D256A77DA00B28C72 /* DemoViewController.swift in Sources */,
+				0A50D73125B61AD100F608A3 /* ImageCacheService.swift in Sources */,
 				0A41CCD625AF6C7F008AD50A /* FriendsRealmSaveOperation.swift in Sources */,
 				0AE675D4256EE3FA00867FEB /* GroupsGetRequest.swift in Sources */,
 				0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */,
 				0A0193DD252A237B006977E3 /* MemoryDataProvider.swift in Sources */,
 				0AF5BF9A256C24B70040E81A /* UserDto.swift in Sources */,
 				0AE8BD30256A7BF300B28C72 /* Users.swift in Sources */,
+				0A50D72D25B60B1200F608A3 /* CacheService.swift in Sources */,
 				0A41CCD325AF6C3E008AD50A /* VkRequestOperation.swift in Sources */,
 				0A128FB02570165A0005716A /* UsersFollowersRequest.swift in Sources */,
 				0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */,
