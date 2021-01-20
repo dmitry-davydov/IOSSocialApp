@@ -14,6 +14,10 @@ class ImageCacheService {
     let cache: CacheService = CacheService(category: "image")
     let cacheLifetime: Int = 86400 * 30 // 30 дней
     
+    static let shared: ImageCacheService = ImageCacheService()
+    
+    private init(){}
+    
     enum Errors: Error {
         case fileCanNotBeDownloaded
     }
@@ -30,22 +34,28 @@ class ImageCacheService {
                 return getImage(by: url)
             }
             
+            print("[ImageCacheService] \(url.relativePath) was loaded from cache")
             // получить картинку из кеша
             return Promise.value(UIImage(data: cache.readCachedFile(from: url)!)!)
         }
         
+        print("[ImageCacheService] \(url.relativePath) was loaded from server")
+        
         // скачать картинку
         return Promise { [weak self] promise in
-            AF.request(url).responseData(completionHandler: { [weak self] (response) in
-                
-                guard let data = response.data,
-                      !(self?.cache.saveCachedFile(by: url, data: data) ?? false) else {
-                    promise.reject(Errors.fileCanNotBeDownloaded)
-                    return 
-                }
+            DispatchQueue.global(qos: .userInteractive).async {
+                AF.request(url).responseData(completionHandler: { (response) in
                     
-                promise.resolve(UIImage(data: data), nil)
-            })
+                    guard let data = response.data else {
+                        promise.reject(Errors.fileCanNotBeDownloaded)
+                        return
+                    }
+                     
+                    self?.cache.saveCachedFile(by: url, data: data)
+                    promise.resolve(UIImage(data: data), nil)
+                })
+            }
+            
         }
     }
 }

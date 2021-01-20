@@ -6,9 +6,6 @@
 //
 
 import Foundation
-import var CommonCrypto.CC_MD5_DIGEST_LENGTH
-import func CommonCrypto.CC_MD5
-import typealias CommonCrypto.CC_LONG
 
 class CacheService {
     
@@ -20,6 +17,7 @@ class CacheService {
     
     init(category: String) {
         self.category = category
+        createDirectoryIfNotExists()
     }
     
     fileprivate func createDirectoryIfNotExists() {
@@ -40,11 +38,15 @@ class CacheService {
     
     // метод для проверки наличия файла в кеше
     func isFileExists(url: URL) -> Bool {
-        return FileManager.default.fileExists(atPath: getCachedFilePath(from: url))
+        let isExists = FileManager.default.fileExists(atPath: getCachedFilePath(from: url))
+        print("[CacheService] isFileExists: \(url.relativePath) exists: \(isExists)")
+        return isExists
     }
     
     fileprivate func getCachedFilePath(from url: URL) -> String {
-        return rootDirectory.appendingPathComponent(getHashedFile(from: url)).path
+        let path = rootDirectory.appendingPathComponent(getHashedFile(from: url)).path
+        print("[CacheService] getCachedFilePath: \(path)")
+        return path
     }
     
     // получить время создания файла в кеше
@@ -63,32 +65,11 @@ class CacheService {
     }
     
     fileprivate func getHashedFile(from url: URL) -> String {
-        return "\(self.hash(external: url)).\(getExt(url: url))"
+        return "\(self.hash(external: url))"
     }
     
     // захешировать url
     fileprivate func hash(external url: URL) -> String {
-        return MD5(string: url.path).map { String(format: "%02hhx", $0) }.joined()
-    }
-    
-    fileprivate func getExt(url: URL) -> String {
-        return url.path.split(separator: ".").last!.base
+        return url.relativePath.split(separator: "/").joined(separator: "_")
     }
 }
-
-private func MD5(string: String) -> Data {
-        let length = Int(CC_MD5_DIGEST_LENGTH)
-        let messageData = string.data(using:.utf8)!
-        var digestData = Data(count: length)
-
-        _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
-            messageData.withUnsafeBytes { messageBytes -> UInt8 in
-                if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.bindMemory(to: UInt8.self).baseAddress {
-                    let messageLength = CC_LONG(messageData.count)
-                    CC_MD5(messageBytesBaseAddress, messageLength, digestBytesBlindMemory)
-                }
-                return 0
-            }
-        }
-        return digestData
-    }
