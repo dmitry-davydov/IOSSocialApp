@@ -9,7 +9,10 @@ import UIKit
 
 class NewsItemTableViewController: UITableViewController {
     
-    var response: WallGetResponse?
+    private var response: WallGetResponse?
+    private var testCell: NewsFeedTableViewCell = NewsFeedTableViewCell()
+    private var cellHeightCache: [IndexPath: CGFloat] = [:]
+    private let defaultImage: UIImage = UIImage(named: "loading_image")!
     
     var ownerId: Int! {
         didSet {
@@ -22,24 +25,25 @@ class NewsItemTableViewController: UITableViewController {
     }
     
     private func loadWall() {
-        let request = WallGetRequest(ownerId: -ownerId, domain: nil, offset: 0, count: nil, filter: .all, extended: false)
+        let request = WallGetRequest(ownerId: -ownerId, domain: nil, offset: 0, count: nil, filter: .all, extended: true)
         let endpoint = Wall()
-        endpoint.get(request: request, completion: { response in
-            if let err = response.error {
+        
+        endpoint
+            .get(request: request)
+            .done(on: .main) { [weak self] (resp) in
+                self?.response = resp
+                self?.tableView.reloadData()
+            }
+            .catch { (err) in
                 print(err)
-                return
             }
-            
-            if let wallGetResponse = response.response {
-                self.response = wallGetResponse
-                self.tableView.reloadData()
-            }
-        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delaysContentTouches = false
+        
+        tableView.register(NewsFeedTableViewCell.self, forCellReuseIdentifier: "NewsFeedTableViewCell")
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -50,35 +54,59 @@ class NewsItemTableViewController: UITableViewController {
         return self.numbersOfRow
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let newsItem = self.response?.items[indexPath.row] else {
-            fatalError("Can not fetch new item")
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if let height = cellHeightCache[indexPath] {
+            return height
         }
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "newsItemCell", for: indexPath) as? NewsItemTableViewCell else {
-            fatalError("Can not cast TableViewCell to NewsItemTableViewCell")
-        }
+        configureCell(cell: testCell, cellForRowAt: indexPath)
+        let height = testCell.cellHeight
+        cellHeightCache[indexPath] = height
+        
+        return height
+    }
     
-        cell.prepareCell(newsItem)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedTableViewCell") as? NewsFeedTableViewCell else {
+            fatalError("Что то пошло не так")
+        }
         
-//        cell.newsItemImage.isUserInteractionEnabled = true
-//        cell.newsItemImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped)))
-//        
-
+        configureCell(cell: cell, cellForRowAt: indexPath)
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "newsItemCell", for: indexPath) as? NewsItemTableViewCell else {
-            fatalError("Can not cast TableViewCell to NewsItemTableViewCell")
+    private func configureCell(cell: NewsFeedTableViewCell, cellForRowAt indexPath: IndexPath) {
+        
+        guard let newsItemDto = response?.items[indexPath.row] else {
+            fatalError("Could not get data")
         }
         
-        cell.clear()
+        cell.setAvatarImage(defaultImage)
+        
+        if let profile = response?.groups.findBy(ownerId: newsItemDto.ownerId) {
+            cell.setPostOwner(profile.name)
+            
+            ImageCacheService.shared
+                .getImage(by: URL(string: profile.photo50)!)
+                .done(on: .main) { (img) in
+                    cell.setAvatarImage(img)
+                    cell.setPostOwner(profile.name)
+                }
+        } else {
+            cell.setPostOwner("Unknown")
+        }
+        
+        cell.setdate(TimeInterval(newsItemDto.date))
+        cell.setText(text: newsItemDto.text)
+        cell.setLike(count: newsItemDto.likes.count, isUserLiked: newsItemDto.likes.userLikes == 1)
+        cell.setComments(count: newsItemDto.comments?.count ?? 0)
+        cell.setShare(count: newsItemDto.reposts.count)
+        cell.setViewsCount(count: newsItemDto.views.count)
     }
     
     @objc func imageTapped(_ recognizer: UITapGestureRecognizer) {
         print("tapped")
         performSegue(withIdentifier: "ImageSliderSegue", sender: nil)
-        
     }
 }

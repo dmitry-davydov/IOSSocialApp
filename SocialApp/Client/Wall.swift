@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 class Wall: VKClient {
     
@@ -14,11 +15,7 @@ class Wall: VKClient {
         case wallGet = "wall.get"
     }
     
-    func get(request paramters: WallGetRequest, completion: @escaping (VKResponse<WallGetResponse?, Error?>) -> Void) {
-        
-        let requestUrl = buildUrl(for: Methods.wallGet.rawValue, params: paramters.asParameters())
-        
-        performRequest(url: requestUrl.url!, decode: WallGetResponse.self, completion: completion)
-        
+    func get(request parameters: WallGetRequest) -> Promise<WallGetResponse> {
+        return promise(request: parameters, decode: WallGetResponse.self)
     }
 }
