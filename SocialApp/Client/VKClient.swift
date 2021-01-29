@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 typealias VKMethod = String
 
@@ -59,6 +60,11 @@ extension Request {
 }
 
 class VKClient {
+    
+    enum Errors: Error {
+        case unexpectedError
+    }
+    
     private let version = "5.126"
     
     lazy var session = Session.custom
@@ -142,5 +148,41 @@ class VKClient {
                 }
             }
         
+    }
+    
+    func promise<T>(request: RequestProtocol, decode to: T.Type, on: DispatchQoS.QoSClass = .userInitiated) -> Promise<T> where T: Decodable {
+        
+        
+        
+        return Promise { pr in
+            DispatchQueue.global(qos: on).async {[weak self] in
+                
+                guard let self = self else {
+                    pr.reject(Errors.unexpectedError)
+                    return
+                }
+                
+                self.session
+                    .request(self.buildUrl(for: request.getMethod(), params: request.asParameters()))
+                    .debugLog()
+                    .responseData { (response) in
+                        switch response.result {
+                        case .success(_):
+                            do {
+                                guard let data = response.data else { return }
+                                let decodedResponse = try JSONDecoder().decode(to, from: data)
+                                pr.resolve(decodedResponse, nil)
+                            } catch let DecodingError.keyNotFound(key, context) {
+                                pr.reject(DecodingError.keyNotFound(key, context))
+                            } catch let err as NSError {
+                                pr.reject(err)
+                            }
+                        case .failure(let err):
+                            pr.reject(err)
+                        }
+                    }
+            }
+            
+        }
     }
 }
