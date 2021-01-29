@@ -9,18 +9,14 @@ import Foundation
 import UIKit
 
 extension UIImageView {
-    
-    
     func loadFrom(url: URL) {
-        DispatchQueue.global(qos: .userInteractive).async {
-            
-            let imageData = try? Data(contentsOf: url)
-            
-            DispatchQueue.main.async {
-                self.image = UIImage(data: imageData!)
-                self.clipsToBounds = true
+        
+        let _ = ImageCacheService.shared
+            .getImage(by: url)
+            .done(on: .main) { [weak self] (img) in
+                self?.image = img
+                self?.clipsToBounds = true
             }
-        }
     }
 }
 

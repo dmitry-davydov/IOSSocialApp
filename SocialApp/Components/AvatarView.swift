@@ -78,14 +78,12 @@ import UIKit
     }
     
     func loadFrom(url: URL) {
-        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            
-            let imageData = try? Data(contentsOf: url)
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.setImage(UIImage(data: imageData!)!)
+        let _ = ImageCacheService.shared
+            .getImage(by: url)
+            .done(on: .main) { [weak self] (img) in
+                self?.setImage(img)
             }
-        }
+        
     }
     
     override func draw(_ rect: CGRect) {

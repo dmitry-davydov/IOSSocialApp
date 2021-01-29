@@ -22,7 +22,16 @@ class UserGroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.delaysContentTouches = false
         
-        userGroups = GroupsDataProvider.shared.getData()
+        GroupsDataProvider.shared
+            .getData()
+            .done(on: .main) { [weak self] (result) in
+                self?.userGroups = result
+                self?.tableView.reloadData()
+                print("done with groups promise")
+            }
+            .catch { (err) in
+                debugPrint(err.localizedDescription)
+            }
         
         realmNotificationToken = userGroups?._observe(.main, { [weak self] realmCollectionChange in
             switch realmCollectionChange {
