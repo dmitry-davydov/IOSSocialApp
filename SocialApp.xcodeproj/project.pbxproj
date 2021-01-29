@@ -42,6 +42,8 @@
 		0A41CCD025AF6C1D008AD50A /* VkParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41CCCF25AF6C1D008AD50A /* VkParseOperation.swift */; };
 		0A41CCD325AF6C3E008AD50A /* VkRequestOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41CCD225AF6C3E008AD50A /* VkRequestOperation.swift */; };
 		0A41CCD625AF6C7F008AD50A /* FriendsRealmSaveOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A41CCD525AF6C7F008AD50A /* FriendsRealmSaveOperation.swift */; };
+		0A50D72D25B60B1200F608A3 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50D72C25B60B1200F608A3 /* CacheService.swift */; };
+		0A50D73125B61AD100F608A3 /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A50D73025B61AD100F608A3 /* ImageCacheService.swift */; };
 		0A565087253B6F6400FF7018 /* LoadingUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A565086253B6F6400FF7018 /* LoadingUIButton.swift */; };
 		0A670C1E257D25EC000272A6 /* FriendsGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A670C1D257D25EC000272A6 /* FriendsGetResponse.swift */; };
 		0A670C21257D4605000272A6 /* GroupsRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A670C20257D4605000272A6 /* GroupsRealmModel.swift */; };
@@ -59,6 +61,7 @@
 		0A8572E9256300050071C029 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8572E8256300050071C029 /* UserSession.swift */; };
 		0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99F40E2524FB4A00221793 /* LoginViewController.swift */; };
 		0AA3048325798CC500EF5887 /* NewsItemAttchementPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3048225798CC500EF5887 /* NewsItemAttchementPhoto.swift */; };
+		0AA77E5725BC38510052A115 /* DateTimeFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA77E5625BC38510052A115 /* DateTimeFormatterService.swift */; };
 		0AC8816B2586562C005881BD /* FireBaseUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */; };
 		0AD97CBB252BADB30080779C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBA252BADB30080779C /* Extensions.swift */; };
 		0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */; };
@@ -126,6 +129,8 @@
 		0A41CCCF25AF6C1D008AD50A /* VkParseOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkParseOperation.swift; sourceTree = "<group>"; };
 		0A41CCD225AF6C3E008AD50A /* VkRequestOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VkRequestOperation.swift; sourceTree = "<group>"; };
 		0A41CCD525AF6C7F008AD50A /* FriendsRealmSaveOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRealmSaveOperation.swift; sourceTree = "<group>"; };
+		0A50D72C25B60B1200F608A3 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		0A50D73025B61AD100F608A3 /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		0A565086253B6F6400FF7018 /* LoadingUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingUIButton.swift; sourceTree = "<group>"; };
 		0A670C1D257D25EC000272A6 /* FriendsGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsGetResponse.swift; sourceTree = "<group>"; };
 		0A670C20257D4605000272A6 /* GroupsRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsRealmModel.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 		0A8572E8256300050071C029 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		0A99F40E2524FB4A00221793 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AA3048225798CC500EF5887 /* NewsItemAttchementPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemAttchementPhoto.swift; sourceTree = "<group>"; };
+		0AA77E5625BC38510052A115 /* DateTimeFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeFormatterService.swift; sourceTree = "<group>"; };
 		0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseUserGroups.swift; sourceTree = "<group>"; };
 		0AD97CBA252BADB30080779C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -304,6 +310,9 @@
 			children = (
 				0A3B8FE72524FF2C003D4939 /* LoginService.swift */,
 				0AE83442257D1C6C00875217 /* RealmService.swift */,
+				0A50D72C25B60B1200F608A3 /* CacheService.swift */,
+				0A50D73025B61AD100F608A3 /* ImageCacheService.swift */,
+				0AA77E5625BC38510052A115 /* DateTimeFormatterService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -668,12 +677,14 @@
 				0A3A5E5F2547496100F255BF /* SocialAppPopAnimation.swift in Sources */,
 				0A2768D1259D04FB00FB348E /* NewsFeedGetResponse.swift in Sources */,
 				0AE8BD2D256A77DA00B28C72 /* DemoViewController.swift in Sources */,
+				0A50D73125B61AD100F608A3 /* ImageCacheService.swift in Sources */,
 				0A41CCD625AF6C7F008AD50A /* FriendsRealmSaveOperation.swift in Sources */,
 				0AE675D4256EE3FA00867FEB /* GroupsGetRequest.swift in Sources */,
 				0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */,
 				0A0193DD252A237B006977E3 /* MemoryDataProvider.swift in Sources */,
 				0AF5BF9A256C24B70040E81A /* UserDto.swift in Sources */,
 				0AE8BD30256A7BF300B28C72 /* Users.swift in Sources */,
+				0A50D72D25B60B1200F608A3 /* CacheService.swift in Sources */,
 				0A41CCD325AF6C3E008AD50A /* VkRequestOperation.swift in Sources */,
 				0A128FB02570165A0005716A /* UsersFollowersRequest.swift in Sources */,
 				0A2EE15E251FAF35009AECA1 /* AppDelegate.swift in Sources */,
@@ -695,6 +706,7 @@
 				0AE8344A257D228700875217 /* FriendsGetRequest.swift in Sources */,
 				0AE8BD33256A7D8000B28C72 /* VKClient.swift in Sources */,
 				0A128FBB2570565B0005716A /* Wall.swift in Sources */,
+				0AA77E5725BC38510052A115 /* DateTimeFormatterService.swift in Sources */,
 				0A1A3F202527B26F00235937 /* TabViewController.swift in Sources */,
 				0AD97CC3252BC30B0080779C /* UserCollectionViewController.swift in Sources */,
 				0A670C21257D4605000272A6 /* GroupsRealmModel.swift in Sources */,

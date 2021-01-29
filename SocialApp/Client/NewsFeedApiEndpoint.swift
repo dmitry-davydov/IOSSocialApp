@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 class NewsFeedApiEndpiont: VKClient {
     func get(request parameters: NewsFeedGetRequest, completion: @escaping (VKResponse<NewsFeedGetResponse?, Error?>) -> Void) {
