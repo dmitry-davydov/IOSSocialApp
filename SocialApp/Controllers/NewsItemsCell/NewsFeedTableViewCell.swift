@@ -89,6 +89,7 @@ class NewsFeedTableViewCell: UITableViewCell {
         textView.isOpaque = false
         textView.textInputView.backgroundColor = .systemBackground
         textView.textInputView.isOpaque = false
+        textView.layer.isOpaque = true
         
         likeButton.setImage(UIImage.init(systemName: "suit.heart"), for: .normal)
         likeButton.setTitle("0", for: .normal)
