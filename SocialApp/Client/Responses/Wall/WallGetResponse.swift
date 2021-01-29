@@ -7,14 +7,30 @@
 
 import Foundation
 
+extension Array where Element == GroupDto {
+    func findBy(ownerId: Int) -> GroupDto? {
+        for item in self {
+            if ownerId.magnitude != item.id {
+                continue
+            }
+            
+            return item
+        }
+        
+        return nil
+    }
+}
+
 struct WallGetResponse: Decodable {
     var count: Int
     var items: [GroupItemDto]
+    var groups: [GroupDto]
     
     enum CodingKeys: String, CodingKey {
         case response
         case items
         case count
+        case groups
     }
     
     init(from decoder: Decoder) throws {
@@ -23,5 +39,6 @@ struct WallGetResponse: Decodable {
         
         self.count = try response.decode(Int.self, forKey: .count)
         self.items = try response.decode([GroupItemDto].self, forKey: .items)
+        self.groups = try response.decode([GroupDto].self, forKey: .groups)
     }
 }

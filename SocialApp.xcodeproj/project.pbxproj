@@ -61,6 +61,7 @@
 		0A8572E9256300050071C029 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8572E8256300050071C029 /* UserSession.swift */; };
 		0A99F40F2524FB4A00221793 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99F40E2524FB4A00221793 /* LoginViewController.swift */; };
 		0AA3048325798CC500EF5887 /* NewsItemAttchementPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA3048225798CC500EF5887 /* NewsItemAttchementPhoto.swift */; };
+		0AA77E5725BC38510052A115 /* DateTimeFormatterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA77E5625BC38510052A115 /* DateTimeFormatterService.swift */; };
 		0AC8816B2586562C005881BD /* FireBaseUserGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */; };
 		0AD97CBB252BADB30080779C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBA252BADB30080779C /* Extensions.swift */; };
 		0AD97CC0252BC12B0080779C /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */; };
@@ -147,6 +148,7 @@
 		0A8572E8256300050071C029 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		0A99F40E2524FB4A00221793 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AA3048225798CC500EF5887 /* NewsItemAttchementPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemAttchementPhoto.swift; sourceTree = "<group>"; };
+		0AA77E5625BC38510052A115 /* DateTimeFormatterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeFormatterService.swift; sourceTree = "<group>"; };
 		0AC8816A2586562C005881BD /* FireBaseUserGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseUserGroups.swift; sourceTree = "<group>"; };
 		0AD97CBA252BADB30080779C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0AD97CBF252BC12B0080779C /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				0AE83442257D1C6C00875217 /* RealmService.swift */,
 				0A50D72C25B60B1200F608A3 /* CacheService.swift */,
 				0A50D73025B61AD100F608A3 /* ImageCacheService.swift */,
+				0AA77E5625BC38510052A115 /* DateTimeFormatterService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				0AE8344A257D228700875217 /* FriendsGetRequest.swift in Sources */,
 				0AE8BD33256A7D8000B28C72 /* VKClient.swift in Sources */,
 				0A128FBB2570565B0005716A /* Wall.swift in Sources */,
+				0AA77E5725BC38510052A115 /* DateTimeFormatterService.swift in Sources */,
 				0A1A3F202527B26F00235937 /* TabViewController.swift in Sources */,
 				0AD97CC3252BC30B0080779C /* UserCollectionViewController.swift in Sources */,
 				0A670C21257D4605000272A6 /* GroupsRealmModel.swift in Sources */,
