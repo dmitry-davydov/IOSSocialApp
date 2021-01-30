@@ -174,10 +174,12 @@ class VKClient {
                                 pr.resolve(decodedResponse, nil)
                             } catch let DecodingError.keyNotFound(key, context) {
                                 pr.reject(DecodingError.keyNotFound(key, context))
-                            } catch let err as NSError {
+                            } catch let err {
+                                print(err.localizedDescription)
                                 pr.reject(err)
                             }
                         case .failure(let err):
+                            fatalError(err.localizedDescription)
                             pr.reject(err)
                         }
                     }

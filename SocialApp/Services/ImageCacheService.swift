@@ -34,12 +34,12 @@ class ImageCacheService {
                 return getImage(by: url)
             }
             
-            print("[ImageCacheService] \(url.relativePath) was loaded from cache")
+//            print("[ImageCacheService] \(url.relativePath) was loaded from cache")
             // получить картинку из кеша
             return Promise.value(UIImage(data: cache.readCachedFile(from: url)!)!)
         }
         
-        print("[ImageCacheService] \(url.relativePath) was loaded from server")
+//        print("[ImageCacheService] \(url.relativePath) was loaded from server")
         
         // скачать картинку
         return Promise { [weak self] promise in

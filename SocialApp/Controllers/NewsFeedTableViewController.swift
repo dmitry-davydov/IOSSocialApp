@@ -7,8 +7,8 @@
 
 import UIKit
 
-class NewsFeedTableViewController: UITableViewController {
-
+class NewsFeedTableViewController: UITableViewController, CellHeightChangedDelegate {
+   
     var testCell: NewsFeedTableViewCell = NewsFeedTableViewCell()
     private var cellHeightCache: [IndexPath: CGFloat] = [:]
     private let defaultImage: UIImage = UIImage(named: "loading_image")!
@@ -25,6 +25,9 @@ class NewsFeedTableViewController: UITableViewController {
 //        endpoint.get(request: request) { response in
 //            print(response)
 //        }
+        
+        tableView.isUserInteractionEnabled = true
+        tableView.allowsSelection = false
         
         tableView.register(NewsFeedTableViewCell.self, forCellReuseIdentifier: "NewsFeedTableViewCell")
     }
@@ -55,14 +58,25 @@ class NewsFeedTableViewController: UITableViewController {
     }
     
     private func configureCell(cell: NewsFeedTableViewCell, cellForRowAt indexPath: IndexPath) {
+        cell.cellHeightChangedDelegate = self
         cell.setAvatarImage(UIImage(named: "test")!)
         cell.setPostOwner("test owner name")
         cell.setdate(TimeInterval(1611401093))
-        cell.setText(text: "Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text ")
+        cell.setText(text: "Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text ")
         cell.setLike(count: 10, isUserLiked: true)
         cell.setComments(count: 29)
         cell.setShare(count: 50)
         cell.setViewsCount(count: 100)
     }
     
+    func cellHeightDidChanged(newHeight: CGFloat, at indexPath: IndexPath) {
+        print("cell height changed to \(newHeight)")
+        testCell.isFullTextShowing.toggle()
+        tableView.endUpdates()
+    }
+    
+    func cellHeightWillChange(at indexPath: IndexPath) {
+        print("cell height will change")
+        tableView.beginUpdates()
+    }
 }
