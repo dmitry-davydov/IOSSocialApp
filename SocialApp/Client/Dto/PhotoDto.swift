@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct PhotoSize: Codable, JsonObjectInitProtocol {
     // (string) — тип копии
@@ -22,7 +23,8 @@ struct PhotoSize: Codable, JsonObjectInitProtocol {
 
     var type: String
     // URL копии.
-    var url: String
+    var url: String?
+    var src: String?
     // высота в px.
     var width: Int
     // ширина в px.
@@ -33,6 +35,14 @@ struct PhotoSize: Codable, JsonObjectInitProtocol {
         self.url = anyMap["url"] as! String
         self.width = anyMap["width"] as! Int
         self.height = anyMap["height"] as! Int
+    }
+    
+    func imageUrl() -> URL {
+        return URL(string: url != nil ? url! : src!)!
+    }
+    
+    func aspectRatio() -> CGFloat {
+        return CGFloat(height)/CGFloat(width)
     }
 }
 

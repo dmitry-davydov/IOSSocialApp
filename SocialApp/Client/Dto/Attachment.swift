@@ -48,6 +48,34 @@ enum PhotoSizeType: String {
     case w
 
 }
+extension Array where Element == PhotoSize {
+    
+    func find(by type: PhotoSizeType) -> PhotoSize? {
+        for size in self {
+            if size.type != type.rawValue { continue }
+            return size
+        }
+        
+        return nil
+    }
+    
+    func sortByWidth() -> [PhotoSize] {
+        return self.sorted { (a, b) -> Bool in
+            return a.width > b.width
+        }
+    }
+    
+    func findBy(width: Int) -> PhotoSize? {
+        for size in self {
+            if size.width < width { continue }
+            
+            return size
+        }
+        
+        return nil
+    }
+}
+
 
 extension Array where Element == AttachmentPhotoSize {
     

@@ -13,4 +13,5 @@ target 'SocialApp' do
 #  pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod "PromiseKit/CorePromise", "~> 6.8"
+  pod 'Texture', '~> 3.0'
 end

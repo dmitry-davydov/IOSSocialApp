@@ -6,77 +6,62 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
-class NewsFeedTableViewController: UITableViewController, CellHeightChangedDelegate {
-   
-    var testCell: NewsFeedTableViewCell = NewsFeedTableViewCell()
-    private var cellHeightCache: [IndexPath: CGFloat] = [:]
-    private let defaultImage: UIImage = UIImage(named: "loading_image")!
+
+class NewsFeedTableViewController: ASDKViewController<ASTableNode>, ASTableDelegate, ASTableDataSource {
+    private var images: [String] = [
+        "https://placeimg.com/640/480/any?q=2",
+        "https://placeimg.com/640/480/any?q=1",
+        "https://placeimg.com/640/480/any?q=3",
+    ]
+    
+    override init() {
+        super.init(node: ASTableNode())
+        node.delegate = self
+        node.dataSource = self
+        node.allowsSelection = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-//         self.clearsSelectionOnViewWillAppear = true
-        
-//        var request = NewsFeedGetRequest(filters: [.photo, .post], returnBanned: false, startTime: nil, endTime: nil, maxPhotos: 5, startFrom: nil, count: 1, userFields: nil, groupFields: nil, section: nil)
-        
-//        let endpoint = NewsFeedApiEndpiont()
-//        endpoint.get(request: request) { response in
-//            print(response)
-//        }
-        
-        tableView.isUserInteractionEnabled = true
-        tableView.allowsSelection = false
-        
-        tableView.register(NewsFeedTableViewCell.self, forCellReuseIdentifier: "NewsFeedTableViewCell")
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        configureCell(cell: testCell, cellForRowAt: indexPath)
+    func numberOfSections(in tableNode: ASTableNode) -> Int {
+        return 1
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+        guard images.count > indexPath.row else { return { ASCellNode() }() }
         
-        return testCell.cellHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedTableViewCell") as? NewsFeedTableViewCell else {
-            fatalError("Что то пошло не так")
-        }
         
-        configureCell(cell: cell, cellForRowAt: indexPath)
-        return cell
+        let node = ASCellNode(viewControllerBlock: { () -> UIViewController in
+            return FriendsTableViewController()
+        }, didLoad: nil)
+        
+        return node
     }
     
-    private func configureCell(cell: NewsFeedTableViewCell, cellForRowAt indexPath: IndexPath) {
-        cell.cellHeightChangedDelegate = self
-        cell.setAvatarImage(UIImage(named: "test")!)
-        cell.setPostOwner("test owner name")
-        cell.setdate(TimeInterval(1611401093))
-        cell.setText(text: "Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text ")
-        cell.setLike(count: 10, isUserLiked: true)
-        cell.setComments(count: 29)
-        cell.setShare(count: 50)
-        cell.setViewsCount(count: 100)
-    }
+//    var tableNode: ASTableNode {
+//        node
+//    }
     
-    func cellHeightDidChanged(newHeight: CGFloat, at indexPath: IndexPath) {
-        print("cell height changed to \(newHeight)")
-        testCell.isFullTextShowing.toggle()
-        tableView.endUpdates()
-    }
+//    init() {
+//        super.init(style: .plain)
+//        self.style.width = ASDimension(unit: .fraction, value: 1)
+//        self.style.height = ASDimension(unit: .fraction, value: 1)
+//        self.style.flexShrink = 1
+//    }
+//    
     
-    func cellHeightWillChange(at indexPath: IndexPath) {
-        print("cell height will change")
-        tableView.beginUpdates()
-    }
+    
 }
+

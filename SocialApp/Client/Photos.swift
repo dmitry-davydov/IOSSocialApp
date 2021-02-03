@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 class Photos: VKClient {
     
@@ -27,13 +28,12 @@ class Photos: VKClient {
         }
     }
     
-    func getAlbums(request parameters: PhotosGetAlbumsRequest) {
-        
-        let requestUrl = buildUrl(for: Methods.getAlbums.rawValue, params: parameters.asParameters())
-        
-        AF.request(requestUrl.url!).responseJSON {response in
-            print(response.value)
-        }
+    func getPhotosInAlbum(request parameters: PhotosGetByAlbumIdRequest) -> Promise<PhotosGetResponse> {
+        return promise(request: parameters, decode: PhotosGetResponse.self)
+    }
+    
+    func getAlbums(request parameters: PhotosGetAlbumsRequest) -> Promise<PhotosGetAlbumsReponse> {
+        return promise(request: parameters, decode: PhotosGetAlbumsReponse.self)
     }
     
     func getById(request parameters: PhotosGetByIdRequest) {
