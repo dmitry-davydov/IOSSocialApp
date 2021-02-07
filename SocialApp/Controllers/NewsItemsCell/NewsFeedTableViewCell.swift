@@ -8,6 +8,11 @@
 import UIKit
 
 
+protocol CellHeightChangedDelegate: class {
+    func cellHeightDidChanged(newHeight: CGFloat, at indexPath: IndexPath)
+    func cellHeightWillChange(at indexPath: IndexPath)
+}
+
 struct Specs {
     static let topPaddingSize: CGFloat = 8
     static let leadingPaddingSize: CGFloat = 8
@@ -19,10 +24,14 @@ struct Specs {
     static let bottomButtonsHeight: CGFloat = 20
     
     static let dateFormat: String = "dd.MM.yyyy HH.mm"
+    
+    static let maxTextViewHeight: CGFloat = 200
 }
 
 class NewsFeedTableViewCell: UITableViewCell {
 
+    weak var cellHeightChangedDelegate: CellHeightChangedDelegate?
+    
     // top views
     var avatar: UIImageView = UIImageView()
     var postOwner: UILabel = UILabel()
@@ -37,17 +46,39 @@ class NewsFeedTableViewCell: UITableViewCell {
     var commentsButton: UIButton = UIButton()
     var shareButton: UIButton = UIButton()
     var viewsCount: UIButton = UIButton()
-
+    var indexPath: IndexPath?
+    
+    var showMoreButton: UIButton = UIButton()
+       
+    var isFullTextShowing: Bool = false
+    var isShowMoreButtonEnabled: Bool = false
+    
+    var showMoreButtonY: CGFloat {
+        if showMoreButton.frame.height == 0 {
+            return textView.frame.maxY + Specs.paddingBetweenViews
+        }
+        
+        return showMoreButton.frame.maxY + Specs.paddingBetweenViews
+    }
+    
     lazy private var bottomItemWidth: CGFloat = {
         return ceil((UIScreen.main.bounds.width - Specs.leadingPaddingSize - Specs.trailingPaddingSize)/4)
     }()
     
     var cellHeight: CGFloat {
-
         
         var height: CGFloat = Specs.topPaddingSize + Specs.bottomPaddingSize + Specs.avatarSize.height + Specs.bottomButtonsHeight
-
-        height += textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - Specs.leadingPaddingSize - Specs.trailingPaddingSize, height: CGFloat.greatestFiniteMagnitude)).height + Specs.paddingBetweenViews + Specs.paddingBetweenViews
+        
+        var textViewHeight = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - Specs.leadingPaddingSize - Specs.trailingPaddingSize, height: CGFloat.greatestFiniteMagnitude)).height + Specs.paddingBetweenViews + Specs.paddingBetweenViews
+        
+        if isShowMoreButtonEnabled && !isFullTextShowing {
+            textViewHeight = Specs.maxTextViewHeight + Specs.paddingBetweenViews + Specs.paddingBetweenViews
+        }
+        
+        height += textViewHeight
+        
+        height += showMoreButton.frame.height
+        
         return height
         
     }
@@ -63,14 +94,15 @@ class NewsFeedTableViewCell: UITableViewCell {
     }
     
     private func commonInit() {
-        addSubview(avatar)
-        addSubview(postOwner)
-        addSubview(dateLabel)
-        addSubview(textView)
-        addSubview(likeButton)
-        addSubview(commentsButton)
-        addSubview(shareButton)
-        addSubview(viewsCount)
+        contentView.addSubview(avatar)
+        contentView.addSubview(postOwner)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(textView)
+        contentView.addSubview(likeButton)
+        contentView.addSubview(commentsButton)
+        contentView.addSubview(shareButton)
+        contentView.addSubview(viewsCount)
+        contentView.addSubview(showMoreButton)
         
         postOwner.font = .systemFont(ofSize: 17)
         postOwner.numberOfLines = 0
@@ -90,6 +122,7 @@ class NewsFeedTableViewCell: UITableViewCell {
         textView.textInputView.backgroundColor = .systemBackground
         textView.textInputView.isOpaque = false
         textView.layer.isOpaque = true
+        textView.textContainer.lineBreakMode = .byTruncatingTail
         
         likeButton.setImage(UIImage.init(systemName: "suit.heart"), for: .normal)
         likeButton.setTitle("0", for: .normal)
@@ -107,6 +140,15 @@ class NewsFeedTableViewCell: UITableViewCell {
         viewsCount.setTitle("0", for: .normal)
         viewsCount.isUserInteractionEnabled = false
         setupBottomButton(view: viewsCount)
+        
+        showMoreButton.setTitle("Show More", for: .normal)
+        showMoreButton.titleLabel?.font = .systemFont(ofSize: 15)
+        showMoreButton.setTitleColor(.gray, for: .normal)
+        showMoreButton.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        showMoreButton.contentHorizontalAlignment = .right
+        showMoreButton.addTarget(self, action: #selector(showMoreButtonPressed(_:)), for: .touchUpInside)
+        showMoreButton.isUserInteractionEnabled = true
+    
     }
     
     private func setupBottomButton(view: UIButton) {
@@ -117,6 +159,28 @@ class NewsFeedTableViewCell: UITableViewCell {
         view.titleLabel?.backgroundColor = .systemBackground
         view.imageView?.backgroundColor = .systemBackground
         view.imageView?.isOpaque = false
+    }
+    
+    @objc func showMoreButtonPressed(_ sender: UIButton) {
+        print("button pressed")
+        if let indexPath = indexPath {
+            cellHeightChangedDelegate?.cellHeightWillChange(at: indexPath)
+        }
+        
+        if self.isFullTextShowing {
+            self.showMoreButton.setTitle("Show more", for: .normal)
+        } else {
+            self.showMoreButton.setTitle("Show less", for: .normal)
+        }
+        
+        self.isFullTextShowing.toggle()
+        
+        self.layoutTextView()
+        self.layoutBottomButtons()
+        if let indexPath = self.indexPath {
+            self.cellHeightChangedDelegate?.cellHeightDidChanged(newHeight: self.cellHeight, at: indexPath)
+        }
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -180,7 +244,6 @@ class NewsFeedTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
         // first row views
         layoutAvatar()
         layoutPostOwner()
@@ -192,6 +255,10 @@ class NewsFeedTableViewCell: UITableViewCell {
         
         // bottom row
         
+        layoutBottomButtons()
+    }
+    
+    private func layoutBottomButtons() {
         layoutLikeButton()
         layoutCommentsButton()
         layoutShareButton()
@@ -214,18 +281,39 @@ class NewsFeedTableViewCell: UITableViewCell {
     private func layoutTextView() {
         let contentSize = textView.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - Specs.leadingPaddingSize - Specs.trailingPaddingSize, height: CGFloat.greatestFiniteMagnitude))
         
+        print("content size: \(contentSize.height) at indexPath: \(indexPath)")
+        
+        var frameHeight: CGFloat = contentSize.height
+        
+        isShowMoreButtonEnabled = contentSize.height > Specs.maxTextViewHeight
+        
+        if isFullTextShowing && isShowMoreButtonEnabled {
+            frameHeight = ceil(contentSize.height)
+        } else if isShowMoreButtonEnabled {
+            frameHeight = Specs.maxTextViewHeight
+        }
+        
         textView.frame = CGRect(
             x: Specs.leadingPaddingSize,
-            y: dateLabel.frame.maxY + Specs.paddingBetweenViews,
+            y: avatar.frame.maxY + Specs.paddingBetweenViews,
             width: contentSize.width,
-            height: ceil(contentSize.height)
+            height: frameHeight
         )
+        
+        if isShowMoreButtonEnabled {
+            showMoreButton.frame = CGRect(
+                x: Specs.leadingPaddingSize,
+                y: textView.frame.maxY ,
+                width: UIScreen.main.bounds.width - Specs.leadingPaddingSize - Specs.leadingPaddingSize,
+                height: getLabelSize(text: showMoreButton.titleLabel?.text, font: .systemFont(ofSize: 15)).height
+            )
+        }
     }
     
     private func layoutLikeButton() {
         likeButton.frame = CGRect(
             x: Specs.leadingPaddingSize,
-            y: textView.frame.maxY + Specs.paddingBetweenViews,
+            y: showMoreButtonY,
             width: bottomItemWidth,
             height: Specs.bottomButtonsHeight
         )
