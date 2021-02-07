@@ -53,8 +53,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="abp-Nc-PDW" kind="relationship" relationship="viewControllers" id="xlO-Dv-W5q"/>
                         <segue destination="KDX-mv-TcI" kind="relationship" relationship="viewControllers" id="Ne7-Yk-48J"/>
+                        <segue destination="Kch-ac-OzS" kind="relationship" relationship="viewControllers" id="Ki3-zP-IHR"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dac-od-Qdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -133,14 +133,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Zbe-VS-xKk" customClass="NewsItemTableViewCell" customModule="SocialApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="164"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="165"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zbe-VS-xKk" id="Sxy-Aq-Sbc">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="164"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="165"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WBV-wR-kan">
-                                            <rect key="frame" x="5" y="20" width="404" height="124"/>
+                                            <rect key="frame" x="5" y="20" width="404" height="125"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rl9-Sq-ZUg">
                                                     <rect key="frame" x="0.0" y="0.0" width="404" height="18"/>
@@ -149,11 +149,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryt-zM-oDv">
-                                                    <rect key="frame" x="0.0" y="18" width="404" height="56"/>
+                                                    <rect key="frame" x="0.0" y="18" width="404" height="57"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aSL-xy-kdM">
-                                                    <rect key="frame" x="0.0" y="74" width="404" height="50"/>
+                                                    <rect key="frame" x="0.0" y="75" width="404" height="50"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7zm-i3-X4O">
                                                             <rect key="frame" x="0.0" y="0.0" width="202" height="50"/>
@@ -234,12 +234,12 @@
             </objects>
             <point key="canvasLocation" x="5556" y="1061"/>
         </scene>
-        <!--User Collection View Controller-->
+        <!--Collection View Controller-->
         <scene sceneID="8j5-BR-ZbP">
             <objects>
-                <collectionViewController id="iYN-TU-iIX" customClass="UserCollectionViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="iYN-TU-iIX" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xr7-Bw-b7c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TdQ-Hh-oXW">
@@ -442,6 +442,7 @@
                             <outlet property="delegate" destination="Kch-ac-OzS" id="f4g-GQ-TsE"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Friends" image="person" catalog="system" id="yp6-eG-6Gr"/>
                     <navigationItem key="navigationItem" title="Friends" id="KTM-jh-NEK"/>
                     <connections>
                         <outlet property="searchBar" destination="LZW-be-Ewm" id="psp-tV-43t"/>
@@ -450,23 +451,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lu6-6o-em0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4295.652173913044" y="-474.10714285714283"/>
-        </scene>
-        <!--Friends-->
-        <scene sceneID="gee-mh-l96">
-            <objects>
-                <navigationController id="abp-Nc-PDW" customClass="SocialAppNavigationController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" image="person.fill" catalog="system" id="9CA-kD-77p"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7jl-ek-t5c">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Kch-ac-OzS" kind="relationship" relationship="rootViewController" id="lqL-LC-onZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WBl-56-3fm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3515.9420289855075" y="-474.10714285714283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MH7-v6-PFb">
@@ -514,13 +498,28 @@
             </objects>
             <point key="canvasLocation" x="1106" y="764"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="C0E-vm-ebx">
+            <objects>
+                <viewController id="3oW-XR-UCw" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O9v-R1-Kwo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="qfD-DA-I4n"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fNs-rK-fYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5177" y="-1150"/>
+        </scene>
     </scenes>
     <resources>
         <image name="hea" width="128" height="128"/>
         <image name="loading_image" width="387" height="387"/>
         <image name="message" catalog="system" width="128" height="113"/>
+        <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
         <image name="suit.heart.fill" catalog="system" width="128" height="109"/>

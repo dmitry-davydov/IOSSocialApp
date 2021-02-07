@@ -175,7 +175,7 @@ class VKClient {
                             } catch let DecodingError.keyNotFound(key, context) {
                                 pr.reject(DecodingError.keyNotFound(key, context))
                             } catch let err {
-                                print(err.localizedDescription)
+                                print("Catched in decoding" + err.localizedDescription)
                                 pr.reject(err)
                             }
                         case .failure(let err):

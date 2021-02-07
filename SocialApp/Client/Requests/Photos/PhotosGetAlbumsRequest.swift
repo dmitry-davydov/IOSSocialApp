@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 
 struct PhotosGetAlbumsRequest: RequestProtocol {
-    var ownerId: UserID?
-    var albumIds: [Int] = []
+    var ownerId: String?
+    var albumIds: [Int]?
     var offset: Int = 0
     var needSystem: Bool = false
     var needCovers: Bool = true
@@ -27,7 +27,7 @@ struct PhotosGetAlbumsRequest: RequestProtocol {
             params["owner_id"] = ownerId
         }
         
-        if albumIds.count > 0 {
+        if let albumIds = albumIds, albumIds.count > 0 {
             params["album_ids"] = albumIds.map {"\($0)"}.joined(separator: ",")
         }
         

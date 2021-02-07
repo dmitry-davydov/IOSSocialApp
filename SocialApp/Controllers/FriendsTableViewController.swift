@@ -91,6 +91,13 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return indexedUsers[section].count
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedUser = indexedUsers[indexPath.section][indexPath.row]
+        let vc = UserCollectionViewController(userModel: selectedUser)
+        
+        show(vc, sender: self)
+    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,14 +115,14 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let destintaion = segue.destination as! UserCollectionViewController
-        
-        let selectedIndexPath = self.tableView.indexPathForSelectedRow!
-        let selectedUser = indexedUsers[selectedIndexPath.section][selectedIndexPath.row]
-        destintaion.user = selectedUser
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        let destintaion = segue.destination as! UserCollectionViewController
+//
+//        let selectedIndexPath = self.tableView.indexPathForSelectedRow!
+//        let selectedUser = indexedUsers[selectedIndexPath.section][selectedIndexPath.row]
+//        destintaion.user = selectedUser
+//    }
 
 }
 
