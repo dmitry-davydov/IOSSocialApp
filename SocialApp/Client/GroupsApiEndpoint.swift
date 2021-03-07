@@ -15,7 +15,9 @@ enum GroupType: String {
 
 
 
-class GroupsApiEndpoint: VKClient {
+class GroupsApiEndpoint {
+    
+    let client: VKClientProtocol = VKClientLogging(client: VKClient())
     
     private enum Methods: VKMethod {
         case get = "groups.get"
@@ -23,7 +25,7 @@ class GroupsApiEndpoint: VKClient {
     }
     
     func currentUserGroups() {
-        let requestUrl = buildUrl(for: Methods.get.rawValue, params: [
+        let requestUrl = client.buildUrl(for: Methods.get.rawValue, params: [
             "extended": "1",
             "fields": "id,name,type,photo_100"
         ])
@@ -34,7 +36,7 @@ class GroupsApiEndpoint: VKClient {
     }
     
     func search(by name: String, type: GroupType) {
-        let requestUrl = buildUrl(for: Methods.search.rawValue, params: [
+        let requestUrl = client.buildUrl(for: Methods.search.rawValue, params: [
             "q": name,
             "type": type.rawValue,
         ])
@@ -45,7 +47,7 @@ class GroupsApiEndpoint: VKClient {
     }
     
     func get(request parameters: GroupsGetRequest) -> Promise<GroupsGetResponse> {
-        return promise(request: parameters, decode: GroupsGetResponse.self)
+        return client.promise(request: parameters, decode: GroupsGetResponse.self, on: .userInteractive)
     }
 }
 
