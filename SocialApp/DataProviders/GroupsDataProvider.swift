@@ -27,7 +27,7 @@ class GroupsDataProvider {
     
     func getData() -> Promise<Results<GroupsRealmModel>> {
         
-        if lastUpdatedAt == 0, let promise = loadFromApi() {
+        if let promise = loadFromApi() {
             return promise
                 .then { (_) -> Promise<Results<GroupsRealmModel>> in
                     return Promise.value(RealmService.shared.realm.objects(GroupsRealmModel.self))

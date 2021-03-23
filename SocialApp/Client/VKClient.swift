@@ -59,7 +59,33 @@ extension Request {
    }
 }
 
-class VKClient {
+protocol VKClientProtocol {
+    func promise<T>(request: RequestProtocol, decode to: T.Type, on: DispatchQoS.QoSClass) -> Promise<T> where T: Decodable
+    func buildUrl(for method: VKMethod, params: Parameters?) -> URLComponents
+}
+
+class VKClientLogging: VKClientProtocol {
+    
+    private var client: VKClient
+    init(client: VKClient) {
+        self.client = client
+    }
+    
+    func buildUrl(for method: VKMethod, params: Parameters?) -> URLComponents {
+        print("Build url for method \(method) and params: \(params)")
+        return client.buildUrl(for: method, params: params)
+    }
+    
+    func promise<T>(request: RequestProtocol, decode to: T.Type, on: DispatchQoS.QoSClass) -> Promise<T> where T : Decodable {
+        print("Performing request with promise")
+        print("With request: \(request)")
+        print("To decode type: \(to)")
+        print("On thead: \(on)")
+        return client.promise(request: request, decode: to, on: on)
+    }
+}
+
+class VKClient: VKClientProtocol {
     
     enum Errors: Error {
         case unexpectedError
